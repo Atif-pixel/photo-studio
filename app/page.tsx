@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Intro from "@/components/Intro";
 import FeaturedStories from "@/components/FeaturedStories";
 import Services from "@/components/Services";
+import Testimonials from "@/components/Testimonial";
 // import TargetCursor from "@/components/TargetCursor";
 
 export default function Home() {
@@ -21,7 +22,8 @@ export default function Home() {
       <Hero />
       <Intro />
       <FeaturedStories />
-    <Services />
+      <Services />
+      <Testimonials />
     </main>
   );
 }
