@@ -1,0 +1,417 @@
+.drift-wall {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  perspective: var(--dw-perspective, 1200px);
+  perspective-origin: 50% 50%;
+
+  --dw-tile-w: 280px;
+  --dw-tile-h: 210px;
+  --dw-gap: 18px;
+  --dw-radius: 4px;
+  --dw-lift: 64px;
+
+  --dw-dim: 0.72;
+  --dw-gray: 0;
+  --dw-overlay: transparent;
+  --dw-edge: 40%;
+
+  -webkit-mask-image:
+    radial-gradient(
+      ellipse 78% 82% at 50% 46%,
+      #000 var(--dw-edge),
+      transparent 100%
+    ),
+    linear-gradient(
+      to top,
+      #000 var(--dw-edge),
+      transparent 100%
+    );
+
+  -webkit-mask-composite: source-in;
+
+  mask-image:
+    radial-gradient(
+      ellipse 78% 82% at 50% 46%,
+      #000 var(--dw-edge),
+      transparent 100%
+    ),
+    linear-gradient(
+      to top,
+      #000 var(--dw-edge),
+      transparent 100%
+    );
+
+  mask-composite: intersect;
+}
+
+
+/* ============================= */
+/* 3D PLANE */
+/* ============================= */
+
+.drift-wall__plane {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+  flex-direction: row;
+
+  transform-style: preserve-3d;
+
+  cursor: pointer;
+
+  transform-origin: 50% 50%;
+
+  will-change: transform;
+}
+
+
+/* ============================= */
+/* COLUMNS */
+/* ============================= */
+
+.drift-wall__col {
+  position: relative;
+
+  width: calc(
+    var(--dw-tile-w) +
+    var(--dw-gap)
+  );
+
+  transform-style: preserve-3d;
+}
+
+
+.drift-wall__track {
+  display: flex;
+  flex-direction: column;
+
+  will-change: transform;
+
+  transform-style: preserve-3d;
+}
+
+
+/* ============================= */
+/* TESTIMONIAL TILE */
+/* ============================= */
+
+.drift-wall__tile {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  height: calc(
+    var(--dw-tile-h) +
+    var(--dw-gap)
+  );
+
+  flex: 0 0 auto;
+
+  outline: none;
+
+  transform-style: preserve-3d;
+
+  text-decoration: none;
+}
+
+
+/* ============================= */
+/* CARD */
+/* ============================= */
+
+.drift-wall__inner {
+  position: absolute;
+
+  inset: calc(
+    var(--dw-gap) / 2
+  );
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  overflow: hidden;
+
+  padding: 28px;
+
+  border-radius:
+    var(--dw-radius);
+
+  border: 1px solid
+    rgba(23, 23, 23, 0.14);
+
+  background:
+    rgba(242, 240, 235, 0.82);
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+
+  opacity:
+    var(--dw-dim);
+
+  transform:
+    translateZ(0);
+
+  pointer-events: none;
+
+  transition:
+    transform 0.42s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      ),
+
+    opacity 0.42s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      ),
+
+    box-shadow 0.42s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
+}
+
+
+/* ============================= */
+/* QUOTE MARK */
+/* ============================= */
+
+.drift-wall__quote-mark {
+  position: absolute;
+
+  top: 12px;
+  right: 22px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 76px;
+
+  line-height: 1;
+
+  font-weight: 400;
+
+  color:
+    rgba(23, 23, 23, 0.1);
+
+  user-select: none;
+}
+
+
+/* ============================= */
+/* CONTENT */
+/* ============================= */
+
+.drift-wall__content {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  height: 100%;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding-top: 8px;
+}
+
+
+/* ============================= */
+/* TESTIMONIAL TEXT */
+/* ============================= */
+
+.drift-wall__quote {
+  display: block;
+
+  max-width: 100%;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 17px;
+
+  line-height: 1.55;
+
+  letter-spacing:
+    -0.01em;
+
+  color:
+    rgba(23, 23, 23, 0.82);
+}
+
+
+/* ============================= */
+/* DIVIDER */
+/* ============================= */
+
+.drift-wall__divider {
+  display: block;
+
+  width: 32px;
+
+  height: 1px;
+
+  margin-top: 20px;
+  margin-bottom: 12px;
+
+  background:
+    rgba(23, 23, 23, 0.25);
+}
+
+
+/* ============================= */
+/* AUTHOR */
+/* ============================= */
+
+.drift-wall__author {
+  display: block;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size: 10px;
+
+  line-height: 1.4;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing:
+    0.2em;
+
+  color:
+    rgba(23, 23, 23, 0.78);
+}
+
+
+/* ============================= */
+/* LOCATION / DATE */
+/* ============================= */
+
+.drift-wall__meta {
+  display: block;
+
+  margin-top: 5px;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+
+  line-height: 1.4;
+
+  text-transform: uppercase;
+
+  letter-spacing:
+    0.15em;
+
+  color:
+    rgba(23, 23, 23, 0.42);
+}
+
+
+/* ============================= */
+/* HOVER / ACTIVE */
+/* ============================= */
+
+.drift-wall__tile.is-active
+  .drift-wall__inner,
+
+.drift-wall__tile:focus-visible
+  .drift-wall__inner {
+  opacity: 1;
+
+  transform:
+    translateZ(
+      var(--dw-lift)
+    );
+
+  box-shadow:
+    0 24px 60px -18px
+      rgba(0, 0, 0, 0.24);
+}
+
+
+/* ============================= */
+/* FOCUS */
+/* ============================= */
+
+.drift-wall__tile:focus-visible
+  .drift-wall__inner {
+  box-shadow:
+    0 24px 60px -18px
+      rgba(0, 0, 0, 0.24),
+
+    0 0 0 2px
+      rgba(23, 23, 23, 0.25);
+}
+
+
+/* ============================= */
+/* REDUCED MOTION */
+/* ============================= */
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .drift-wall__plane,
+  .drift-wall__track {
+    will-change: auto;
+  }
+}
+
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .drift-wall {
+    --dw-tile-w: 240px;
+    --dw-tile-h: 190px;
+  }
+
+  .drift-wall__inner {
+    padding: 22px;
+  }
+
+  .drift-wall__quote {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .drift-wall__quote-mark {
+    font-size: 62px;
+  }
+}
