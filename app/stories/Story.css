@@ -1,0 +1,869 @@
+/* =========================================================
+   STORY SECTION
+========================================================= */
+
+.story-section {
+  position: relative;
+
+  width: 100%;
+  min-height: 100svh;
+
+  overflow: hidden;
+
+  background: #f2f0eb;
+  color: #171717;
+
+  padding: 120px 5vw 40px;
+
+  display: flex;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   GRAIN
+========================================================= */
+
+.story-noise {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.035;
+
+  z-index: -1;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.story-label {
+  position: absolute;
+
+  top: 110px;
+  left: 5vw;
+
+  display: flex;
+
+  gap: 18px;
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.18em;
+}
+
+.story-label span:first-child {
+  opacity: 0.4;
+}
+
+
+/* =========================================================
+   LEFT AREA
+========================================================= */
+
+.story-left {
+  position: relative;
+
+  width: 58%;
+
+  height: calc(100svh - 160px);
+
+  margin-top: 55px;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   STORY TEXT
+========================================================= */
+
+.story-copy {
+  position: absolute;
+
+  left: 0;
+
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  z-index: 5;
+}
+
+.story-kicker {
+  margin: 0 0 22px 4px;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.18em;
+
+  opacity: 0.55;
+}
+
+.story-copy h2 {
+  margin: 0;
+
+  font-size:
+    clamp(
+      58px,
+      7vw,
+      120px
+    );
+
+  line-height: 0.87;
+
+  letter-spacing: -0.065em;
+
+  font-weight: 500;
+}
+
+.story-copy h2 span {
+  margin-left: 5vw;
+}
+
+.story-copy h2 em {
+  font-style: normal;
+
+  color: transparent;
+
+  -webkit-text-stroke:
+    1px #171717;
+}
+
+.story-description {
+  margin:
+    55px 0 0 5px;
+
+  font-size: 11px;
+
+  line-height: 1.6;
+
+  letter-spacing: 0.04em;
+
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   PHOTO SPLASH
+========================================================= */
+
+.story-splash {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 4;
+
+  overflow: visible;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   SPLASH TRACK
+========================================================= */
+
+.story-splash-track {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: visible;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   SPLASH IMAGES
+========================================================= */
+
+.story-splash-image {
+  position: absolute;
+
+  /*
+    IMPORTANT:
+
+    The photo origin is now aligned
+    with the folder instead of the
+    wall / left-area edge.
+
+    Desktop:
+    left area ends before the folder,
+    so the negative right value bridges
+    that gap.
+  */
+
+  right: -10vw;
+
+  top: 50%;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  background: #dedbd4;
+
+  box-shadow:
+    0 12px 35px
+    rgba(0, 0, 0, 0.08);
+
+  will-change:
+    transform,
+    opacity;
+
+  transform-origin:
+    center center;
+
+  pointer-events: none;
+}
+
+
+.story-splash-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   DIFFERENT PHOTO SHAPES
+========================================================= */
+
+.story-splash-image-0 {
+  width: 180px;
+  height: 240px;
+}
+
+.story-splash-image-1 {
+  width: 250px;
+  height: 180px;
+}
+
+.story-splash-image-2 {
+  width: 160px;
+  height: 220px;
+}
+
+.story-splash-image-3 {
+  width: 280px;
+  height: 190px;
+}
+
+.story-splash-image-4 {
+  width: 190px;
+  height: 270px;
+}
+
+.story-splash-image-5 {
+  width: 230px;
+  height: 170px;
+}
+
+
+/* =========================================================
+   SPLASH EDGE FADE
+========================================================= */
+
+.story-splash-fade {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  height: 100px;
+
+  pointer-events: none;
+
+  z-index: 10;
+}
+
+.story-splash-fade-top {
+  top: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #f2f0eb,
+      transparent
+    );
+}
+
+.story-splash-fade-bottom {
+  bottom: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      #f2f0eb,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   RIGHT FOLDER
+========================================================= */
+
+.story-folder-wrapper {
+  position: absolute;
+
+  z-index: 20;
+
+  right: 7vw;
+
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  width:
+    clamp(
+      280px,
+      34vw,
+      500px
+    );
+
+  transition:
+    right 0.6s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+
+/*
+   IMPORTANT:
+
+   When the gallery opens,
+   the folder remains in exactly
+   the same place.
+
+   No movement.
+*/
+
+.story-folder-open {
+  right: 7vw;
+}
+
+
+/* =========================================================
+   FOLDER
+========================================================= */
+
+.story-folder {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 0.78;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #171717;
+
+  cursor: pointer;
+
+  overflow: visible;
+
+  text-align: left;
+}
+
+
+/* Folder tab */
+
+.story-folder-tab {
+  position: absolute;
+
+  top: -13px;
+  left: 0;
+
+  width: 31%;
+  height: 20px;
+
+  background: #dedbd4;
+
+  border-radius:
+    5px 5px 0 0;
+
+  z-index: 0;
+}
+
+
+/* Image */
+
+.story-folder-image {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  background: #ddd9d1;
+
+  z-index: 1;
+}
+
+.story-folder-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  user-select: none;
+}
+
+
+/* Overlay */
+
+.story-folder-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.02) 30%,
+      rgba(0, 0, 0, 0.68) 100%
+    );
+}
+
+
+/* Information */
+
+.story-folder-info {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 3;
+
+  padding: 22px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  color: white;
+}
+
+
+/* Top */
+
+.story-folder-top {
+  display: flex;
+
+  justify-content: space-between;
+
+  font-size: 9px;
+
+  letter-spacing: 0.18em;
+}
+
+.story-folder-top span:first-child {
+  opacity: 0.65;
+}
+
+
+/* Bottom */
+
+.story-folder-bottom {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+}
+
+.story-folder-bottom > div {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.story-folder-label {
+  margin-bottom: 7px;
+
+  font-size: 8px;
+
+  letter-spacing: 0.2em;
+
+  opacity: 0.7;
+}
+
+.story-folder-bottom strong {
+  font-size:
+    clamp(
+      23px,
+      2.2vw,
+      34px
+    );
+
+  font-weight: 400;
+
+  letter-spacing: -0.04em;
+}
+
+.story-folder-bottom
+  > div
+  > span:last-child {
+  margin-top: 5px;
+
+  font-size: 9px;
+
+  letter-spacing: 0.1em;
+
+  opacity: 0.7;
+}
+
+.story-folder-open-text {
+  font-size: 9px;
+
+  letter-spacing: 0.17em;
+
+  padding-bottom: 3px;
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.story-bottom {
+  position: absolute;
+
+  bottom: 38px;
+
+  left: 5vw;
+  right: 5vw;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  font-size: 9px;
+
+  letter-spacing: 0.18em;
+
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .story-left {
+    width: 55%;
+  }
+
+  .story-copy h2 {
+    font-size:
+      clamp(
+        50px,
+        8vw,
+        90px
+      );
+  }
+
+  .story-folder-wrapper {
+    right: 5vw;
+
+     width: clamp(350px, 45vw, 700px);
+  }
+
+  /*
+    Tablet has a larger gap between
+    the left area and the folder,
+    so move the splash origin farther
+    toward the folder.
+  */
+
+  .story-splash-image {
+    right: -10vw;
+  }
+
+  .story-splash-image-0 {
+    width: 140px;
+    height: 190px;
+  }
+
+  .story-splash-image-1 {
+    width: 190px;
+    height: 140px;
+  }
+
+  .story-splash-image-2 {
+    width: 130px;
+    height: 175px;
+  }
+
+  .story-splash-image-3 {
+    width: 210px;
+    height: 145px;
+  }
+
+  .story-splash-image-4 {
+    width: 150px;
+    height: 205px;
+  }
+
+  .story-splash-image-5 {
+    width: 175px;
+    height: 130px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .story-section {
+    min-height: 100svh;
+
+    padding:
+      100px
+      20px
+      35px;
+
+    display: block;
+  }
+
+
+  /* Label */
+
+  .story-label {
+    top: 82px;
+
+    left: 20px;
+  }
+
+
+  /* Left area */
+
+  .story-left {
+    width: 100%;
+
+    height: 100svh;
+
+    margin-top: 0;
+  }
+
+
+  /* Text */
+
+  .story-copy {
+    left: 0;
+
+    top: 130px;
+
+    transform: none;
+
+    width: 100%;
+  }
+
+  .story-kicker {
+    font-size: 9px;
+
+    margin-bottom: 18px;
+  }
+
+  .story-copy h2 {
+    font-size:
+      clamp(
+        48px,
+        14vw,
+        75px
+      );
+
+    line-height: 0.9;
+  }
+
+  .story-copy h2 span {
+    margin-left: 5vw;
+  }
+
+  .story-description {
+    margin-top: 35px;
+
+    font-size: 10px;
+  }
+
+
+  /* =======================================================
+     MOBILE FOLDER
+  ======================================================== */
+
+  .story-folder-wrapper {
+
+    position: absolute;
+
+    top: auto;
+
+    bottom: 85px;
+
+    right: 20px;
+
+    transform: none;
+
+    width: 72vw;
+
+    max-width: 330px;
+  }
+
+
+  .story-folder-open {
+    right: 20px;
+  }
+
+
+  .story-folder-info {
+    padding: 18px;
+  }
+
+
+  .story-folder-bottom strong {
+    font-size: 24px;
+  }
+
+
+  /* =======================================================
+     MOBILE SPLASH
+  ======================================================== */
+
+  .story-splash {
+
+    top: 80px;
+
+    height: calc(
+      100svh - 80px
+    );
+
+    width: 100%;
+
+    align-items: flex-start;
+
+    overflow: visible;
+  }
+
+
+  .story-splash-track {
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+  }
+
+
+  /*
+    Mobile folder is positioned 20px
+    from the right, so the photo origin
+    follows the same right edge.
+  */
+
+  .story-splash-image {
+    right: 20px;
+
+    top: 40%;
+  }
+
+
+  .story-splash-image-0 {
+    width: 110px;
+    height: 150px;
+  }
+
+  .story-splash-image-1 {
+    width: 150px;
+    height: 105px;
+  }
+
+  .story-splash-image-2 {
+    width: 90px;
+    height: 130px;
+  }
+
+  .story-splash-image-3 {
+    width: 165px;
+    height: 110px;
+  }
+
+  .story-splash-image-4 {
+    width: 105px;
+    height: 145px;
+  }
+
+  .story-splash-image-5 {
+    width: 135px;
+    height: 95px;
+  }
+
+
+  /* Bottom */
+
+  .story-bottom {
+
+    bottom: 25px;
+
+    left: 20px;
+    right: 20px;
+
+    font-size: 8px;
+  }
+
+}
