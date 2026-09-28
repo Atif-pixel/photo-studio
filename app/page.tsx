@@ -4,6 +4,8 @@ import Intro from "@/components/Intro";
 import FeaturedStories from "@/components/FeaturedStories";
 import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonial";
+import StorySection from "@/components/StorySection";
+import Footer from "@/components/Footer";
 // import TargetCursor from "@/components/TargetCursor";
 
 export default function Home() {
@@ -24,6 +26,9 @@ export default function Home() {
       <FeaturedStories />
       <Services />
       <Testimonials />
+      <StorySection />
+      <Footer />
+      
     </main>
   );
 }
