@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const navItems = [
   { path: "/", name: "Home" },
-  { path: "/work", name: "Stories" },
+  { path: "/stories", name: "Stories" },
   { path: "/about", name: "About" },
   { path: "/contact", name: "Contact" },
 ];
@@ -23,17 +23,17 @@ export default function NavBar() {
         <div className="flex items-center justify-between">
 
           {/* Logo */}
-<Link
-  href="/"
-  className="relative z-50 group"
-  onClick={() => setMenuOpen(false)}
->
-  <img
-    src="/logo.jpeg"
-    alt="Wedding Studio"
-    className="w-auto h-12 md:h-14 object-contain"
-  />
-</Link>
+          <Link
+            href="/"
+            className="relative z-50 group"
+            onClick={() => setMenuOpen(false)}
+          >
+            <img
+              src="/logo.jpeg"
+              alt="Wedding Studio"
+              className="w-auto h-12 md:h-14 object-contain"
+            />
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-2">
@@ -80,33 +80,33 @@ export default function NavBar() {
 
           {/* Menu button */}
           <button
-  onClick={() => setMenuOpen(!menuOpen)}
-  className="relative z-50 flex md:hidden items-center gap-3 text-white mix-blend-difference"
->
-  <span className="text-[10px] tracking-[0.25em] uppercase">
-    {menuOpen ? "Close" : "Menu"}
-  </span>
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="relative z-50 flex md:hidden items-center gap-3 text-white mix-blend-difference"
+          >
+            <span className="text-[10px] tracking-[0.25em] uppercase">
+              {menuOpen ? "Close" : "Menu"}
+            </span>
 
-  <div className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center">
-    <div className="relative w-4 h-3">
-      <motion.span
-        animate={{
-          rotate: menuOpen ? 45 : 0,
-          y: menuOpen ? 5 : 0,
-        }}
-        className="absolute left-0 top-0 w-full h-[1px] bg-white"
-      />
+            <div className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center">
+              <div className="relative w-4 h-3">
+                <motion.span
+                  animate={{
+                    rotate: menuOpen ? 45 : 0,
+                    y: menuOpen ? 5 : 0,
+                  }}
+                  className="absolute left-0 top-0 w-full h-[1px] bg-white"
+                />
 
-      <motion.span
-        animate={{
-          rotate: menuOpen ? -45 : 0,
-          y: menuOpen ? -5 : 0,
-        }}
-        className="absolute left-0 bottom-0 w-full h-[1px] bg-white"
-      />
-    </div>
-  </div>
-</button>
+                <motion.span
+                  animate={{
+                    rotate: menuOpen ? -45 : 0,
+                    y: menuOpen ? -5 : 0,
+                  }}
+                  className="absolute left-0 bottom-0 w-full h-[1px] bg-white"
+                />
+              </div>
+            </div>
+          </button>
         </div>
 
         {/* Fullscreen Menu */}
