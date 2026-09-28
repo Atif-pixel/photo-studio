@@ -1,0 +1,256 @@
+.stories-hero {
+  position: relative;
+  min-height: 100svh;
+  width: 100%;
+  overflow: hidden;
+  background: #f2f0eb;
+  color: #171717;
+  padding: 120px 5vw 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  isolation: isolate;
+}
+
+/* --------------------------------
+   SUBTLE GRAIN
+-------------------------------- */
+
+.stories-hero-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+
+/* --------------------------------
+   TOP LABEL
+-------------------------------- */
+
+.stories-hero-label {
+  position: absolute;
+  top: 110px;
+  left: 5vw;
+
+  display: flex;
+  gap: 18px;
+
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  font-weight: 500;
+}
+
+.stories-hero-label span:first-child {
+  opacity: 0.4;
+}
+
+/* --------------------------------
+   MAIN HEADING
+-------------------------------- */
+
+.stories-hero-heading {
+  position: relative;
+  z-index: 2;
+  width: min(850px, 75vw);
+  margin-top: 70px;
+}
+
+.stories-hero-kicker {
+  margin: 0 0 20px 4px;
+
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+
+  opacity: 0.55;
+}
+
+.stories-hero-heading h1 {
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  font-size: clamp(58px, 8.3vw, 145px);
+  line-height: 0.86;
+  letter-spacing: -0.065em;
+  font-weight: 500;
+}
+
+.stories-hero-heading h1 span {
+  display: block;
+}
+
+.stories-hero-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px #171717;
+  margin-left: 8vw;
+}
+
+/* --------------------------------
+   IMAGE
+-------------------------------- */
+
+.stories-hero-image-wrap {
+  position: absolute;
+
+  width: clamp(230px, 27vw, 430px);
+  height: clamp(310px, 39vw, 560px);
+
+  right: 10vw;
+  top: 50%;
+  transform: translateY(-50%);
+
+  z-index: 1;
+  overflow: hidden;
+}
+
+.stories-hero-image {
+  width: 100%;
+  height: 100%;
+
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.02),
+      rgba(0, 0, 0, 0.18)
+    ),
+    url("/stories/hero.jpg");
+
+  background-size: cover;
+  background-position: center;
+}
+
+/* --------------------------------
+   BOTTOM
+-------------------------------- */
+
+.stories-hero-bottom {
+  position: absolute;
+
+  bottom: 38px;
+  left: 5vw;
+  right: 5vw;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+}
+
+.stories-hero-description {
+  opacity: 0.55;
+}
+
+.stories-hero-scroll {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  font-size: 9px;
+  letter-spacing: 0.18em;
+}
+
+.stories-hero-arrow {
+  font-size: 18px;
+  line-height: 1;
+  opacity: 0.6;
+}
+
+/* --------------------------------
+   TABLET
+-------------------------------- */
+
+@media (max-width: 900px) {
+  .stories-hero {
+    padding: 120px 6vw 40px;
+  }
+
+  .stories-hero-heading {
+    width: 90vw;
+  }
+
+  .stories-hero-heading h1 {
+    font-size: clamp(55px, 11vw, 100px);
+  }
+
+  .stories-hero-image-wrap {
+    right: 7vw;
+    width: 30vw;
+    height: 42vw;
+  }
+
+  .stories-hero-outline {
+    margin-left: 5vw;
+  }
+}
+
+/* --------------------------------
+   MOBILE
+-------------------------------- */
+
+@media (max-width: 600px) {
+  .stories-hero {
+    min-height: 100svh;
+    padding: 100px 20px 35px;
+    justify-content: flex-start;
+  }
+
+  .stories-hero-label {
+    top: 82px;
+    left: 20px;
+  }
+
+  .stories-hero-heading {
+    width: 100%;
+    margin-top: 130px;
+  }
+
+  .stories-hero-kicker {
+    font-size: 9px;
+    margin-bottom: 18px;
+  }
+
+  .stories-hero-heading h1 {
+    font-size: clamp(48px, 15vw, 78px);
+    line-height: 0.9;
+  }
+
+  .stories-hero-outline {
+    margin-left: 5vw;
+  }
+
+  .stories-hero-image-wrap {
+    position: relative;
+
+    top: auto;
+    right: auto;
+
+    transform: none;
+
+    width: 58vw;
+    height: 72vw;
+
+    margin: 55px 0 0 auto;
+  }
+
+  .stories-hero-bottom {
+    bottom: 25px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .stories-hero-description {
+    display: none;
+  }
+
+  .stories-hero-scroll {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
