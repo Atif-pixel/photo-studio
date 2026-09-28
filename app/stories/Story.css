@@ -1,4 +1,17 @@
 /* =========================================================
+   STORIES CONTAINER
+========================================================= */
+
+.stories-container {
+  position: relative;
+
+  width: 100%;
+
+  background: #f2f0eb;
+}
+
+
+/* =========================================================
    STORY SECTION
 ========================================================= */
 
@@ -18,6 +31,24 @@
   display: flex;
 
   isolation: isolate;
+}
+
+
+/* =========================================================
+   EDITORIAL SPACING
+   Inspired by Featured Stories spacing
+========================================================= */
+
+.story-section + .story-section {
+  margin-top: 11rem;
+}
+
+@media (min-width: 768px) {
+
+  .story-section + .story-section {
+    margin-top: 15rem;
+  }
+
 }
 
 
@@ -81,6 +112,53 @@
   margin-top: 55px;
 
   overflow: hidden;
+}
+
+
+/* =========================================================
+   REVERSED EDITORIAL STORIES
+========================================================= */
+
+.story-section-reversed .story-left {
+  order: 2;
+
+  margin-left: auto;
+}
+
+.story-section-reversed .story-folder-wrapper {
+  right: auto;
+  left: 7vw;
+}
+
+.story-section-reversed .story-folder-open {
+  right: auto;
+  left: 7vw;
+}
+
+.story-section-reversed .story-bottom {
+  flex-direction: row-reverse;
+}
+
+
+/* =========================================================
+   REVERSED SPLASH ORIGIN
+========================================================= */
+
+.story-section-reversed .story-splash-image {
+  right: auto;
+
+  left: 0;
+}
+
+
+/* =========================================================
+   REVERSED STORY TEXT
+========================================================= */
+
+.story-section-reversed .story-copy {
+  left: auto;
+
+  right: 0;
 }
 
 
@@ -205,19 +283,6 @@
 .story-splash-image {
   position: absolute;
 
-  /*
-    IMPORTANT:
-
-    The photo origin is now aligned
-    with the folder instead of the
-    wall / left-area edge.
-
-    Desktop:
-    left area ends before the folder,
-    so the negative right value bridges
-    that gap.
-  */
-
   right: -10vw;
 
   top: 50%;
@@ -241,7 +306,6 @@
 
   pointer-events: none;
 }
-
 
 .story-splash-image img {
   width: 100%;
@@ -367,17 +431,28 @@
 
 
 /*
-   IMPORTANT:
-
    When the gallery opens,
    the folder remains in exactly
    the same place.
-
-   No movement.
 */
 
 .story-folder-open {
   right: 7vw;
+}
+
+
+/* =========================================================
+   REVERSED FOLDER
+========================================================= */
+
+.story-section-reversed .story-folder-wrapper {
+  right: auto;
+  left: 7vw;
+}
+
+.story-section-reversed .story-folder-open {
+  right: auto;
+  left: 7vw;
 }
 
 
@@ -602,6 +677,10 @@
 
 @media (max-width: 900px) {
 
+  .story-section + .story-section {
+    margin-top: 10rem;
+  }
+
   .story-left {
     width: 55%;
   }
@@ -618,18 +697,40 @@
   .story-folder-wrapper {
     right: 5vw;
 
-     width: clamp(350px, 45vw, 700px);
+    width: clamp(
+      350px,
+      45vw,
+      700px
+    );
   }
 
-  /*
-    Tablet has a larger gap between
-    the left area and the folder,
-    so move the splash origin farther
-    toward the folder.
-  */
+  .story-section-reversed .story-folder-wrapper {
+    right: auto;
+    left: 5vw;
+  }
+
+  .story-section-reversed .story-folder-open {
+    right: auto;
+    left: 5vw;
+  }
+
+  .story-section-reversed .story-left {
+    margin-left: auto;
+  }
+
+  .story-section-reversed .story-copy {
+    left: auto;
+    right: 0;
+  }
 
   .story-splash-image {
     right: -10vw;
+  }
+
+  .story-section-reversed .story-splash-image {
+    right: auto;
+
+    left: 0;
   }
 
   .story-splash-image-0 {
@@ -682,6 +783,11 @@
   }
 
 
+  .story-section + .story-section {
+    margin-top: 8rem;
+  }
+
+
   /* Label */
 
   .story-label {
@@ -712,6 +818,16 @@
     transform: none;
 
     width: 100%;
+  }
+
+  .story-section-reversed .story-left {
+    margin-left: 0;
+  }
+
+  .story-section-reversed .story-copy {
+    left: 0;
+
+    right: auto;
   }
 
   .story-kicker {
@@ -756,6 +872,8 @@
 
     right: 20px;
 
+    left: auto;
+
     transform: none;
 
     width: 72vw;
@@ -766,104 +884,22 @@
 
   .story-folder-open {
     right: 20px;
+
+    left: auto;
   }
 
 
-  .story-folder-info {
-    padding: 18px;
-  }
-
-
-  .story-folder-bottom strong {
-    font-size: 24px;
-  }
-
-
-  /* =======================================================
-     MOBILE SPLASH
-  ======================================================== */
-
-  .story-splash {
-
-    top: 80px;
-
-    height: calc(
-      100svh - 80px
-    );
-
-    width: 100%;
-
-    align-items: flex-start;
-
-    overflow: visible;
-  }
-
-
-  .story-splash-track {
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    overflow: visible;
-  }
-
-
-  /*
-    Mobile folder is positioned 20px
-    from the right, so the photo origin
-    follows the same right edge.
-  */
-
-  .story-splash-image {
+  .story-section-reversed .story-folder-wrapper {
     right: 20px;
 
-    top: 40%;
+    left: auto;
   }
 
 
-  .story-splash-image-0 {
-    width: 110px;
-    height: 150px;
-  }
-
-  .story-splash-image-1 {
-    width: 150px;
-    height: 105px;
-  }
-
-  .story-splash-image-2 {
-    width: 90px;
-    height: 130px;
-  }
-
-  .story-splash-image-3 {
-    width: 165px;
-    height: 110px;
-  }
-
-  .story-splash-image-4 {
-    width: 105px;
-    height: 145px;
-  }
-
-  .story-splash-image-5 {
-    width: 135px;
-    height: 95px;
-  }
-
-
-  /* Bottom */
-
-  .story-bottom {
-
-    bottom: 25px;
-
-    left: 20px;
+  .story-section-reversed .story-folder-open {
     right: 20px;
 
-    font-size: 8px;
+    left: auto;
   }
 
-}
+  .story-folder-info { padding: 18px; } .story-folder-bottom strong { font-size: 24px; } /* ======================================================= MOBILE SPLASH ======================================================== */ .story-splash { top: 80px; height: calc( 100svh - 80px ); width: 100%; align-items: flex-start; overflow: visible; } .story-splash-track { inset: 0; width: 100%; height: 100%; overflow: visible; } .story-splash-image { right: 20px; top: 40%; } .story-section-reversed .story-splash-image { right: auto; left: 20px; } .story-splash-image-0 { width: 110px; height: 150px; } .story-splash-image-1 { width: 150px; height: 105px; } .story-splash-image-2 { width: 90px; height: 130px; } .story-splash-image-3 { width: 165px; height: 110px; } .story-splash-image-4 { width: 105px; height: 145px; } .story-splash-image-5 { width: 135px; height: 95px; } /* Bottom */ .story-bottom { bottom: 25px; left: 20px; right: 20px; font-size: 8px; } }
