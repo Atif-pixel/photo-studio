@@ -11,7 +11,7 @@ const services = [
     label: "Destination Wedding",
     eyebrow: "Beyond Boundaries",
     headline: "LOVE HAS NO BOUNDARIES. NEITHER SHOULD YOUR STORY.",
-    image: "/about/destination-wedding.jpg",
+    image: "/about/2.jpg",
     paragraphs: [
       "Some love stories deserve a setting as extraordinary as the emotions they hold.",
       "At BharatiFilm Creation, we believe destination weddings are more than celebrations in beautiful locations. They are journeys filled with romance, adventure, culture, and unforgettable experiences. From breathtaking beachside ceremonies and royal palace celebrations to intimate mountain escapes, every destination has a story waiting to be told.",
@@ -32,7 +32,7 @@ const services = [
     label: "Pre-Wedding",
     eyebrow: "Before The Forever",
     headline: "YOUR LOVE STORY. YOUR ADVENTURE. YOUR FOREVER.",
-    image: "/about/pre-wedding.jpg",
+    image: "/about/3.jpg",
     paragraphs: [
       "Every love story has its own magic — the laughter, the little things, the crazy moments, and the way two people just get each other.",
       "At BharatiFilm Creation, we believe pre-wedding shoots should be more than just beautiful pictures. They should be an experience filled with love, laughter, adventure, and memories you’ll never stop smiling about.",
@@ -53,7 +53,7 @@ const services = [
     label: "Corporate",
     eyebrow: "People & Purpose",
     headline: "VISUAL STORYTELLING FOR BRANDS THAT LEAD.",
-    image: "/about/corporate.jpg",
+    image: "/about/4.jpg",
     paragraphs: [
       "At BharatiFilm Creation, we believe every brand has a story worth telling — a story of vision, innovation, people, and purpose.",
       "We specialize in premium corporate photography and filmmaking that goes beyond capturing images. We create compelling visual narratives that communicate your brand’s identity, reflect its values, and leave a lasting impression.",
@@ -73,7 +73,7 @@ const services = [
     label: "Birthday",
     eyebrow: "Another Year, Another Story",
     headline: "LITTLE MOMENTS. BIG CELEBRATIONS. FOREVER MEMORIES.",
-    image: "/about/birthday.jpg",
+    image: "/about/5.jpg",
     paragraphs: [
       "Every birthday is a beautiful milestone — filled with laughter, surprises, happiness, and moments that deserve to be remembered forever.",
       "At BharatiFilm Creation, we believe birthday photography is about capturing more than just a celebration. It’s about preserving the excitement in little eyes, the warmth of family hugs, the joy of blowing out candles, and the priceless smiles that make every birthday special.",
@@ -92,7 +92,7 @@ const services = [
     label: "Wedding Film",
     eyebrow: "Stories In Motion",
     headline: "NOT JUST A FILM. A FEELING YOU CAN RELIVE FOREVER.",
-    image: "/about/wedding-film.jpg",
+    image: "/about/6.jpg",
     paragraphs: [
       "Some moments are too precious to simply be photographed. They deserve to move, breathe, and live forever through film.",
       "At BharatiFilm Creation, we believe every wedding is a beautiful story waiting to unfold. A story filled with heartfelt promises, stolen glances, happy tears, uncontrollable laughter, and emotions that words can never fully express.",
@@ -171,7 +171,7 @@ export default function About() {
           <div className="relative w-full">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#e5e1d9]">
               <Image
-                src="/about/about-us.jpg"
+                src="/about/1.jpg"
                 alt="BharatiFilm Creation wedding photography"
                 fill
                 priority
