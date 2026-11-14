@@ -1,6 +1,18 @@
+
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import InfiniteSpiral from "@/components/InfiniteSpiral";
+import { useEffect, useState } from "react";
+
+const videos = [
+  "rhHyl_0VjkQ",
+  "u03MsuIcepc",
+  "6qZK-DiuZa8",
+  "2IvsPd-OgXQ",
+  "yV6y5nMfCQA",
+];
 
 const stories = [
   {
@@ -12,75 +24,85 @@ const stories = [
   },
   {
     id: "02",
-    couple: "Kabir × Sara",
+    couple: "Colin × Vaidehi",
     location: "Goa · 2026",
-    image: "/stories/story-02.jpg",
+    image: "/homestory/couple%201/ColixVaidehi01.jpg",
     size: "medium",
   },
   {
     id: "03",
-    couple: "Rahul × Riya",
+    couple: "Pratik × Tana",
     location: "Jaipur · 2026",
-    image: "/stories/story-03.jpg",
+    image: "/homestory/couple-2/PratikxTana01.jpg",
     size: "medium",
   },
 ];
 
 const kabirSaraPhotos = [
   {
-    src: "/stories/kabir-sara/01.jpg",
+    src: "/homestory/couple%201/haldi1.jpg",
     alt: "Kabir and Sara wedding moment",
   },
   {
-    src: "/stories/kabir-sara/02.jpg",
+    src: "/homestory/couple%201/wedding1.jpg",
     alt: "Kabir and Sara wedding celebration",
   },
   {
-    src: "/stories/kabir-sara/03.jpg",
+    src: "/homestory/couple%201/haldi2.jpg",
     alt: "Kabir and Sara wedding portrait",
   },
   {
-    src: "/stories/kabir-sara/04.jpg",
+    src: "/homestory/couple%201/sangeet1.jpg",
     alt: "Kabir and Sara wedding ceremony",
   },
   {
-    src: "/stories/kabir-sara/05.jpg",
+    src: "/homestory/couple%201/wedding2.jpg",
     alt: "Kabir and Sara wedding details",
   },
   {
-    src: "/stories/kabir-sara/06.jpg",
+    src: "/homestory/couple%201/sangit2.jpg",
     alt: "Kabir and Sara wedding dance",
   },
 ];
 
 const rahulRiyaPhotos = [
   {
-    src: "/stories/rahul-riya/01.jpg",
+    src: "/homestory/couple-2/eng1.jpg",
     alt: "Rahul and Riya wedding moment",
   },
   {
-    src: "/stories/rahul-riya/02.jpg",
+    src: "/homestory/couple-2/wedding1.jpg",
     alt: "Rahul and Riya wedding celebration",
   },
   {
-    src: "/stories/rahul-riya/03.jpg",
+    src: "/homestory/couple-2/eng2.jpg",
     alt: "Rahul and Riya wedding portrait",
   },
   {
-    src: "/stories/rahul-riya/04.jpg",
+    src: "/homestory/couple-2/sangeet1.jpg",
     alt: "Rahul and Riya wedding ceremony",
   },
   {
-    src: "/stories/rahul-riya/05.jpg",
+    src: "/homestory/couple-2/wedding2.jpg",
     alt: "Rahul and Riya wedding details",
   },
   {
-    src: "/stories/rahul-riya/06.jpg",
+    src: "/homestory/couple-2/sangeet2.jpg",
     alt: "Rahul and Riya wedding dance",
   },
 ];
 
 export default function FeaturedStories() {
+  const [activeVideo, setActiveVideo] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveVideo((current) => (current + 1) % videos.length);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative w-full overflow-hidden bg-[#f2f0eb] px-6 py-24 text-[#171717] md:px-10 md:py-32 lg:px-16 lg:py-40">
 
@@ -126,13 +148,25 @@ export default function FeaturedStories() {
           <article>
 
             <div className="relative aspect-[16/10] w-full overflow-hidden md:aspect-[16/9]">
-              <Image
-                src={stories[0].image}
-                alt={`${stories[0].couple} wedding`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 90vw"
-              />
+
+              {/* YouTube Video Morph Slider — Arjun × Diya */}
+              {videos.map((video, index) => (
+                <iframe
+                  key={video}
+                  src={`https://www.youtube.com/embed/${video}?autoplay=1&mute=1&loop=1&playlist=${video}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0`}
+                  title={`Arjun and Diya wedding video ${index + 1}`}
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen={false}
+                  className={`absolute left-1/2 top-1/2 h-[120%] w-[215%] -translate-x-1/2 -translate-y-1/2 border-0 transition-all duration-[1100ms] ease-in-out ${
+                    index === activeVideo
+                      ? "scale-100 opacity-100 blur-0"
+                      : "scale-[1.08] opacity-0 blur-[8px]"
+                  }`}
+                  style={{
+                    pointerEvents: "none",
+                  }}
+                />
+              ))}
 
               {/* Image overlay */}
               <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10" />
@@ -276,7 +310,7 @@ export default function FeaturedStories() {
             {/* Infinite Spiral — Desktop only */}
             <div className="relative hidden h-[560px] w-full md:block">
               <InfiniteSpiral
-                items={kabirSaraPhotos}
+                items={rahulRiyaPhotos}
                 animationMode="auto"
                 speed={0.30}
                 radius={145}
@@ -324,4 +358,3 @@ export default function FeaturedStories() {
     </section>
   );
 }
-

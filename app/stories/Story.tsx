@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import "./Story.css";
+import Image from "next/image";
 
 /* =========================================================
    COUPLE DATA
@@ -43,7 +44,7 @@ const couples = [
 
   {
     number: "02",
-    couple: "Kabir & Sara",
+    couple: "Colin & Vaidehi",
     location: "Goa · Maharashtra",
     year: "2026",
 
