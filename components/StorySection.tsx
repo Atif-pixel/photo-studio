@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -9,21 +10,22 @@ type Story = {
   width: number;
   height: number;
   label: string;
+  image: string;
 };
 
 const stories: Story[] = [
-  { id: 1, width: 1200, height: 800, label: "IMAGE 01" },
-  { id: 2, width: 600, height: 800, label: "IMAGE 02" },
-  { id: 3, width: 800, height: 1000, label: "IMAGE 03" },
-  { id: 4, width: 600, height: 800, label: "IMAGE 04" },
-  { id: 5, width: 800, height: 1000, label: "IMAGE 05" },
-  { id: 6, width: 1200, height: 800, label: "IMAGE 06" },
-  { id: 7, width: 600, height: 800, label: "IMAGE 07" },
-  { id: 8, width: 800, height: 1000, label: "IMAGE 08" },
-  { id: 9, width: 1200, height: 800, label: "IMAGE 09" },
-  { id: 10, width: 600, height: 800, label: "IMAGE 10" },
-  { id: 11, width: 800, height: 1000, label: "IMAGE 11" },
-  { id: 12, width: 1200, height: 800, label: "IMAGE 12" },
+  { id: 1, width: 1200, height: 800, label: "IMAGE 01", image: "/homestory/storysection/1.jpg" },
+  { id: 2, width: 600, height: 800, label: "IMAGE 02", image: "/homestory/storysection/2.jpg" },
+  { id: 3, width: 800, height: 1000, label: "IMAGE 03", image: "/homestory/storysection/3.jpg" },
+  { id: 4, width: 600, height: 800, label: "IMAGE 04", image: "/homestory/storysection/4.jpg" },
+  { id: 5, width: 800, height: 1000, label: "IMAGE 05", image: "/homestory/storysection/5.jpg" },
+  { id: 6, width: 1200, height: 800, label: "IMAGE 06", image: "/homestory/storysection/6.jpg" },
+  { id: 7, width: 600, height: 800, label: "IMAGE 07", image: "/homestory/storysection/7.jpg" },
+  { id: 8, width: 800, height: 1000, label: "IMAGE 08", image: "/homestory/storysection/8.jpg" },
+  { id: 9, width: 1200, height: 800, label: "IMAGE 09", image: "/homestory/storysection/9.jpg" },
+  { id: 10, width: 600, height: 800, label: "IMAGE 10", image: "/homestory/storysection/10.jpg" },
+  { id: 11, width: 800, height: 1000, label: "IMAGE 11", image: "/homestory/storysection/11.jpg" },
+  { id: 12, width: 1200, height: 800, label: "IMAGE 12", image: "/homestory/storysection/12.jpg" },
 ];
 
 /*
@@ -62,9 +64,6 @@ export default function StorySection() {
 
     let cameraZ = 0;
 
-    let targetVelocity = 0;
-    let currentVelocity = 0;
-
     let cameraX = 0;
     let cameraY = 0;
 
@@ -77,22 +76,12 @@ export default function StorySection() {
      * ------------------------------------------------
      * INFINITE WORLD
      * ------------------------------------------------
-     *
-     * The cards are distributed over a large Z-space.
-     *
-     * When a card passes behind the camera,
-     * it is mathematically moved back to the
-     * far end of the world.
      */
 
     const DEPTH_CYCLE = 7200;
 
     /*
      * Large spatial layout.
-     *
-     * This is deliberately irregular so it feels
-     * like memories floating through space rather
-     * than a normal grid.
      */
 
     const positions = repeatedStories.map((_, index) => {
@@ -128,9 +117,6 @@ export default function StorySection() {
           yPatterns[column] +
           Math.cos(index * 1.21) * 90,
 
-        /*
-         * Groups are separated deeply in Z.
-         */
         z:
           group * 1800 +
           originalIndex * 145,
@@ -187,47 +173,7 @@ export default function StorySection() {
 
     /*
      * ------------------------------------------------
-     * WHEEL
-     * ------------------------------------------------
-     */
-
-    const handleWheel = (event: WheelEvent) => {
-      const rect = gallery.getBoundingClientRect();
-
-      const inside =
-        event.clientX >= rect.left &&
-        event.clientX <= rect.right &&
-        event.clientY >= rect.top &&
-        event.clientY <= rect.bottom;
-
-      if (!inside) return;
-
-      /*
-       * Positive scrolling:
-       *
-       * Camera moves forward.
-       *
-       * Cards appear to travel toward us,
-       * pass through us and disappear behind.
-       */
-
-      targetVelocity += event.deltaY * 0.75;
-
-      targetVelocity = Math.max(
-        -1500,
-        Math.min(1500, targetVelocity)
-      );
-    };
-
-    window.addEventListener(
-      "wheel",
-      handleWheel,
-      { passive: true }
-    );
-
-    /*
-     * ------------------------------------------------
-     * ANIMATION
+     * AUTOMATIC CINEMATIC ANIMATION
      * ------------------------------------------------
      */
 
@@ -241,31 +187,11 @@ export default function StorySection() {
       lastTime = time;
 
       /*
-       * Smooth velocity.
+       * Camera automatically moves forward.
+       * No mouse wheel or manual scrolling required.
        */
 
-      currentVelocity +=
-        (targetVelocity - currentVelocity) *
-        0.075 *
-        delta;
-
-      /*
-       * Natural slowing.
-       */
-
-      targetVelocity *= Math.pow(
-        0.965,
-        delta
-      );
-
-      /*
-       * Camera moves through the world.
-       */
-
-      cameraZ +=
-        currentVelocity *
-        0.055 *
-        delta;
+      cameraZ -= 1.5 * delta;
 
       /*
        * Keep cameraZ from growing infinitely.
@@ -330,18 +256,11 @@ export default function StorySection() {
           const position = positions[index];
 
           /*
-           * --------------------------------------------
            * DEPTH WRAPPING
-           * --------------------------------------------
            */
 
           let relativeZ =
             position.z - cameraZ;
-
-          /*
-           * Every card exists somewhere in the
-           * infinite depth tunnel.
-           */
 
           relativeZ =
             ((relativeZ +
@@ -350,21 +269,14 @@ export default function StorySection() {
             DEPTH_CYCLE / 2;
 
           /*
-           * --------------------------------------------
            * DISTANCE FROM CAMERA
-           * --------------------------------------------
            */
 
           const distance =
             Math.abs(relativeZ);
 
           /*
-           * --------------------------------------------
            * APPROACH FACTOR
-           * --------------------------------------------
-           *
-           * Cards become dramatically larger
-           * when they approach the viewer.
            */
 
           const approach =
@@ -376,7 +288,7 @@ export default function StorySection() {
             );
 
           /*
-           * Stronger depth scaling.
+           * STRONGER DEPTH SCALING
            */
 
           const scale =
@@ -384,19 +296,12 @@ export default function StorySection() {
             approach * 1.05;
 
           /*
-           * --------------------------------------------
            * OPACITY
-           * --------------------------------------------
            */
 
           let opacity =
             0.08 +
             approach * 0.95;
-
-          /*
-           * Cards directly behind the camera
-           * disappear completely.
-           */
 
           if (relativeZ < -500) {
             opacity *= Math.max(
@@ -406,10 +311,6 @@ export default function StorySection() {
                   500
             );
           }
-
-          /*
-           * Cards far in front gradually appear.
-           */
 
           if (relativeZ > 1400) {
             opacity *= Math.max(
@@ -421,9 +322,7 @@ export default function StorySection() {
           }
 
           /*
-           * --------------------------------------------
            * CINEMATIC DRIFT
-           * --------------------------------------------
            */
 
           const driftX =
@@ -439,7 +338,7 @@ export default function StorySection() {
             ) * 35;
 
           /*
-           * Cards don't travel perfectly straight.
+           * CARDS DON'T TRAVEL PERFECTLY STRAIGHT
            */
 
           const waveX =
@@ -455,7 +354,7 @@ export default function StorySection() {
             ) * 55;
 
           /*
-           * Slight perspective rotation.
+           * SLIGHT PERSPECTIVE ROTATION
            */
 
           const rotateY =
@@ -469,9 +368,7 @@ export default function StorySection() {
             ) * 5;
 
           /*
-           * --------------------------------------------
            * FINAL CARD TRANSFORM
-           * --------------------------------------------
            */
 
           card.style.transform = `
@@ -499,7 +396,7 @@ export default function StorySection() {
             );
 
           /*
-           * Depth sorting.
+           * DEPTH SORTING
            */
 
           card.style.zIndex =
@@ -525,11 +422,6 @@ export default function StorySection() {
       window.removeEventListener(
         "pointermove",
         handlePointerMove
-      );
-
-      window.removeEventListener(
-        "wheel",
-        handleWheel
       );
     };
   }, []);
@@ -591,16 +483,15 @@ export default function StorySection() {
               >
                 <div className="story-card-inner">
                   <div className="story-placeholder">
-                    <div>
-                      <strong>
-                        {story.label}
-                      </strong>
-
-                      <span>
-                        {story.width} ×{" "}
-                        {story.height}
-                      </span>
-                    </div>
+                    <Image
+                      src={story.image}
+                      alt={`Wedding story ${story.originalId}`}
+                      fill
+                      sizes="(max-width: 768px) 80vw, 40vw"
+                      style={{
+                        objectFit: "cover",
+                      }}
+                    />
                   </div>
 
                   <div className="story-card-number">
@@ -616,7 +507,7 @@ export default function StorySection() {
 
         <div className="story-gallery-hint">
           <span>
-            Scroll through the stories
+            A continuous journey through our stories
           </span>
         </div>
       </div>
