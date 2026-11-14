@@ -130,7 +130,7 @@
 .stories-hero-bottom {
   position: absolute;
 
-  bottom: 38px;
+  bottom: 10px;
   left: 5vw;
   right: 5vw;
 
@@ -150,7 +150,7 @@
 .stories-hero-scroll {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 15px;
 
   font-size: 9px;
   letter-spacing: 0.18em;

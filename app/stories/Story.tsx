@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Story.css";
 import Image from "next/image";
 
@@ -13,257 +13,211 @@ import Image from "next/image";
 const couples = [
   {
     number: "01",
-    couple: "Aarav & Meera",
+    couple: "Colin & Vaidehi",
     location: "Pune · Maharashtra",
     year: "2026",
-
     description:
       "Two people, one beautiful beginning, and all the little moments that made it theirs.",
-
-    cover: "/stories/couple-01/cover.jpg",
-
+    cover: "/storypage/couple1/cover.jpg",
     images: [
-      "/stories/couple-01/01.jpg",
-      "/stories/couple-01/02.jpg",
-      "/stories/couple-01/03.jpg",
-      "/stories/couple-01/04.jpg",
-      "/stories/couple-01/05.jpg",
-      "/stories/couple-01/06.jpg",
-      "/stories/couple-01/07.jpg",
-      "/stories/couple-01/08.jpg",
-      "/stories/couple-01/01.jpg",
-      "/stories/couple-01/02.jpg",
-      "/stories/couple-01/03.jpg",
-      "/stories/couple-01/04.jpg",
-      "/stories/couple-01/05.jpg",
-      "/stories/couple-01/06.jpg",
-      "/stories/couple-01/07.jpg",
-      "/stories/couple-01/08.jpg",
+      "/storypage/couple1/6.jpg",
+      "/storypage/couple1/2.jpg",
+      "/storypage/couple1/3.jpg",
+      "/storypage/couple1/4.jpg",
+      "/storypage/couple1/5.jpg",
+      "/storypage/couple1/1.jpg",
+      "/storypage/couple1/7.jpg",
+      "/storypage/couple1/8.jpg",
+      "/storypage/couple1/9.jpg",
+      "/storypage/couple1/10.jpg",
+      "/storypage/couple1/11.jpg",
+      "/storypage/couple1/12.jpg",
+      "/storypage/couple1/13.jpg",
+      "/storypage/couple1/14.jpg",
+      "/storypage/couple1/15.jpg",
+      "/storypage/couple1/16.jpg",
     ],
   },
-
   {
     number: "02",
-    couple: "Colin & Vaidehi",
+    couple: "Pratik & Tana",
     location: "Goa · Maharashtra",
     year: "2026",
-
     description:
       "A celebration filled with sunlight, laughter, music, and two people completely lost in each other.",
-
-    cover: "/stories/couple-02/cover.jpg",
-
+    cover: "/storypage/couple2/cover.jpg",
     images: [
-      "/stories/couple-02/01.jpg",
-      "/stories/couple-02/02.jpg",
-      "/stories/couple-02/03.jpg",
-      "/stories/couple-02/04.jpg",
-      "/stories/couple-02/05.jpg",
-      "/stories/couple-02/06.jpg",
-      "/stories/couple-02/07.jpg",
-      "/stories/couple-02/08.jpg",
-      "/stories/couple-02/01.jpg",
-      "/stories/couple-02/02.jpg",
-      "/stories/couple-02/03.jpg",
-      "/stories/couple-02/04.jpg",
-      "/stories/couple-02/05.jpg",
-      "/stories/couple-02/06.jpg",
-      "/stories/couple-02/07.jpg",
-      "/stories/couple-02/08.jpg",
+      "/storypage/couple2/1.jpg",
+      "/storypage/couple2/2.jpg",
+      "/storypage/couple2/3.jpg",
+      "/storypage/couple2/4.jpg",
+      "/storypage/couple2/5.jpg",
+      "/storypage/couple2/6.jpg",
+      "/storypage/couple2/7.jpg",
+      "/storypage/couple2/8.jpg",
+      "/storypage/couple2/9.jpg",
+      "/storypage/couple2/10.jpg",
+      "/storypage/couple2/11.jpg",
+      "/storypage/couple2/12.jpg",
+      "/storypage/couple2/13.jpg",
+      "/storypage/couple2/14.jpg",
+      "/storypage/couple2/15.jpg",
+      "/storypage/couple2/16.jpg",
     ],
   },
-
   {
     number: "03",
-    couple: "Rahul & Riya",
+    couple: "Rohit & Lucy",
     location: "Jaipur · Rajasthan",
     year: "2026",
-
     description:
       "A day of colour, emotion, quiet glances, and memories that deserved to be remembered exactly as they happened.",
-
-    cover: "/stories/couple-03/cover.jpg",
-
+    cover: "/storypage/couple3/cover.jpg",
     images: [
-      "/stories/couple-03/01.jpg",
-      "/stories/couple-03/02.jpg",
-      "/stories/couple-03/03.jpg",
-      "/stories/couple-03/04.jpg",
-      "/stories/couple-03/05.jpg",
-      "/stories/couple-03/06.jpg",
-      "/stories/couple-03/07.jpg",
-      "/stories/couple-03/08.jpg",
-      "/stories/couple-03/01.jpg",
-      "/stories/couple-03/02.jpg",
-      "/stories/couple-03/03.jpg",
-      "/stories/couple-03/04.jpg",
-      "/stories/couple-03/05.jpg",
-      "/stories/couple-03/06.jpg",
-      "/stories/couple-03/07.jpg",
-      "/stories/couple-03/08.jpg",
+      "/storypage/couple3/1.jpg",
+      "/storypage/couple3/2.jpg",
+      "/storypage/couple3/3.jpg",
+      "/storypage/couple3/4.jpg",
+      "/storypage/couple3/5.jpg",
+      "/storypage/couple3/6.jpg",
+      "/storypage/couple3/7.jpg",
+      "/storypage/couple3/8.jpg",
+      "/storypage/couple3/9.jpg",
+      "/storypage/couple3/10.jpg",
+      "/storypage/couple3/11.jpg",
+      "/storypage/couple3/12.jpg",
+      "/storypage/couple3/13.jpg",
+      "/storypage/couple3/14.jpg",
+      "/storypage/couple3/15.jpg",
+      "/storypage/couple3/16.jpg",
     ],
   },
-
   {
     number: "04",
-    couple: "Vihaan & Anaya",
+    couple: "Tushar & Nidhi",
     location: "Mumbai · Maharashtra",
     year: "2026",
-
     description:
       "Some stories are loud. Some are quiet. Theirs was made of all the beautiful moments in between.",
-
-    cover: "/stories/couple-04/cover.jpg",
-
+    cover: "/storypage/couple4/cover.jpg",
     images: [
-      "/stories/couple-04/01.jpg",
-      "/stories/couple-04/02.jpg",
-      "/stories/couple-04/03.jpg",
-      "/stories/couple-04/04.jpg",
-      "/stories/couple-04/05.jpg",
-      "/stories/couple-04/06.jpg",
-      "/stories/couple-04/07.jpg",
-      "/stories/couple-04/08.jpg",
-      "/stories/couple-04/01.jpg",
-      "/stories/couple-04/02.jpg",
-      "/stories/couple-04/03.jpg",
-      "/stories/couple-04/04.jpg",
-      "/stories/couple-04/05.jpg",
-      "/stories/couple-04/06.jpg",
-      "/stories/couple-04/07.jpg",
-      "/stories/couple-04/08.jpg",
+      "/storypage/couple4/1.jpg",
+      "/storypage/couple4/2.jpg",
+      "/storypage/couple4/3.jpg",
+      "/storypage/couple4/4.jpg",
+      "/storypage/couple4/5.jpg",
+      "/storypage/couple4/6.jpg",
+      "/storypage/couple4/7.jpg",
+      "/storypage/couple4/8.jpg",
+      "/storypage/couple4/9.jpg",
+      "/storypage/couple4/10.jpg",
+      "/storypage/couple4/11.jpg",
+      "/storypage/couple4/12.jpg",
+      "/storypage/couple4/13.jpg",
+      "/storypage/couple4/14.jpg",
+      "/storypage/couple4/15.jpg",
+      "/storypage/couple4/16.jpg",
     ],
   },
-
   {
     number: "05",
-    couple: "Aditya & Kiara",
+    couple: "Chirag & Angel",
     location: "Udaipur · Rajasthan",
     year: "2026",
-
     description:
       "A beautiful gathering of families, old friends, new beginnings, and one unforgettable promise.",
-
-    cover: "/stories/couple-05/cover.jpg",
-
+    cover: "/storypage/couple5/cover.jpg",
     images: [
-      "/stories/couple-05/01.jpg",
-      "/stories/couple-05/02.jpg",
-      "/stories/couple-05/03.jpg",
-      "/stories/couple-05/04.jpg",
-      "/stories/couple-05/05.jpg",
-      "/stories/couple-05/06.jpg",
-      "/stories/couple-05/07.jpg",
-      "/stories/couple-05/08.jpg",
-      "/stories/couple-05/01.jpg",
-      "/stories/couple-05/02.jpg",
-      "/stories/couple-05/03.jpg",
-      "/stories/couple-05/04.jpg",
-      "/stories/couple-05/05.jpg",
-      "/stories/couple-05/06.jpg",
-      "/stories/couple-05/07.jpg",
-      "/stories/couple-05/08.jpg",
+      "/storypage/couple5/1.jpg",
+      "/storypage/couple5/2.jpg",
+      "/storypage/couple5/3.jpg",
+      "/storypage/couple5/4.jpg",
+      "/storypage/couple5/5.jpg",
+      "/storypage/couple5/6.jpg",
+      "/storypage/couple5/7.jpg",
+      "/storypage/couple5/8.jpg",
+      "/storypage/couple5/9.jpg",
+      "/storypage/couple5/10.jpg",
+      "/storypage/couple5/11.jpg",
+      "/storypage/couple5/12.jpg",
+      "/storypage/couple5/13.jpg",
+      "/storypage/couple5/14.jpg",
+      "/storypage/couple5/15.jpg",
+      "/storypage/couple5/16.jpg",
     ],
   },
-
   {
     number: "06",
-    couple: "Arjun & Diya",
+    couple: "Parth & Shradha",
     location: "Delhi · India",
     year: "2026",
-
     description:
       "From nervous smiles to wild celebrations, every frame became a small piece of their beginning.",
-
-    cover: "/stories/couple-06/cover.jpg",
-
+    cover: "/storypage/couple6/cover.jpg",
     images: [
-      "/stories/couple-06/01.jpg",
-      "/stories/couple-06/02.jpg",
-      "/stories/couple-06/03.jpg",
-      "/stories/couple-06/04.jpg",
-      "/stories/couple-06/05.jpg",
-      "/stories/couple-06/06.jpg",
-      "/stories/couple-06/07.jpg",
-      "/stories/couple-06/08.jpg",
-      "/stories/couple-06/01.jpg",
-      "/stories/couple-06/02.jpg",
-      "/stories/couple-06/03.jpg",
-      "/stories/couple-06/04.jpg",
-      "/stories/couple-06/05.jpg",
-      "/stories/couple-06/06.jpg",
-      "/stories/couple-06/07.jpg",
-      "/stories/couple-06/08.jpg",
+      "/storypage/couple6/1.jpg",
+      "/storypage/couple6/2.jpg",
+      "/storypage/couple6/3.jpg",
+      "/storypage/couple6/4.jpg",
+      "/storypage/couple6/5.jpg",
+      "/storypage/couple6/6.jpg",
+      "/storypage/couple6/7.jpg",
+      "/storypage/couple6/8.jpg",
+      "/storypage/couple6/9.jpg",
+      "/storypage/couple6/10.jpg",
+      "/storypage/couple6/11.jpg",
+      "/storypage/couple6/12.jpg",
+      "/storypage/couple6/13.jpg",
+      "/storypage/couple6/14.jpg",
+      "/storypage/couple6/15.jpg",
     ],
   },
-
   {
     number: "07",
-    couple: "Dev & Tara",
+    couple: "Akshay & Eesha",
     location: "Bangalore · Karnataka",
     year: "2026",
-
     description:
       "A story of two people, surrounded by the people they love, making memories without even trying.",
-
-    cover: "/stories/couple-07/cover.jpg",
-
+    cover: "/storypage/couple7/1.jpg",
     images: [
-      "/stories/couple-07/01.jpg",
-      "/stories/couple-07/02.jpg",
-      "/stories/couple-07/03.jpg",
-      "/stories/couple-07/04.jpg",
-      "/stories/couple-07/05.jpg",
-      "/stories/couple-07/06.jpg",
-      "/stories/couple-07/07.jpg",
-      "/stories/couple-07/08.jpg",
-      "/stories/couple-07/01.jpg",
-      "/stories/couple-07/02.jpg",
-      "/stories/couple-07/03.jpg",
-      "/stories/couple-07/04.jpg",
-      "/stories/couple-07/05.jpg",
-      "/stories/couple-07/06.jpg",
-      "/stories/couple-07/07.jpg",
-      "/stories/couple-07/08.jpg",
+      "/storypage/couple7/cover.jpg",
+      "/storypage/couple7/2.jpg",
+      "/storypage/couple7/3.jpg",
+      "/storypage/couple7/4.jpg",
+      "/storypage/couple7/5.jpg",
+      "/storypage/couple7/6.jpg",
+      "/storypage/couple7/7.jpg",
+      "/storypage/couple7/8.jpg",
+      "/storypage/couple7/9.jpg",
+      "/storypage/couple7/10.jpg",
     ],
   },
-
   {
     number: "08",
-    couple: "Reyansh & Isha",
+    couple: "Varun & Rutuja",
     location: "Jodhpur · Rajasthan",
     year: "2026",
-
     description:
       "One last dance, a thousand little memories, and a beginning that felt like it had always been waiting for them.",
-
-    cover: "/stories/couple-08/cover.jpg",
-
+    cover: "/storypage/couple8/cover.jpg",
     images: [
-      "/stories/couple-08/01.jpg",
-      "/stories/couple-08/02.jpg",
-      "/stories/couple-08/03.jpg",
-      "/stories/couple-08/04.jpg",
-      "/stories/couple-08/05.jpg",
-      "/stories/couple-08/06.jpg",
-      "/stories/couple-08/07.jpg",
-      "/stories/couple-08/08.jpg",
-      "/stories/couple-08/01.jpg",
-      "/stories/couple-08/02.jpg",
-      "/stories/couple-08/03.jpg",
-      "/stories/couple-08/04.jpg",
-      "/stories/couple-08/05.jpg",
-      "/stories/couple-08/06.jpg",
-      "/stories/couple-08/07.jpg",
-      "/stories/couple-08/08.jpg",
+      "/storypage/couple8/1.jpg",
+      "/storypage/couple8/2.jpg",
+      "/storypage/couple8/3.jpg",
+      "/storypage/couple8/4.jpg",
+      "/storypage/couple8/5.jpg",
+      "/storypage/couple8/6.jpg",
+      "/storypage/couple8/7.jpg",
+      "/storypage/couple8/8.jpg",
+      "/storypage/couple8/9.jpg",
+      "/storypage/couple8/10.jpg",
     ],
   },
 ];
 
-
 /* =========================================================
    PHOTO SPLASH
-   ANIMATION KEPT EXACTLY AS BEFORE
 ========================================================= */
 
 function PhotoSplash({
@@ -273,116 +227,72 @@ function PhotoSplash({
   images: string[];
   reversed: boolean;
 }) {
+  const [isMobile, setIsMobile] = useState(false);
 
-  const throwPositions = [
-    {
-      x: -300,
-      y: -160,
-      rotate: -12,
-      scale: 1,
-    },
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 600px)");
 
-    {
-      x: -470,
-      y: 40,
-      rotate: 8,
-      scale: 0.9,
-    },
+    const updateScreenSize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
 
-    {
-      x: -650,
-      y: -100,
-      rotate: -6,
-      scale: 0.82,
-    },
+    updateScreenSize();
 
-    {
-      x: -800,
-      y: 120,
-      rotate: 11,
-      scale: 0.95,
-    },
+    mediaQuery.addEventListener("change", updateScreenSize);
 
-    {
-      x: -560,
-      y: 200,
-      rotate: -9,
-      scale: 0.78,
-    },
+    return () => {
+      mediaQuery.removeEventListener("change", updateScreenSize);
+    };
+  }, []);
 
-    {
-      x: -350,
-      y: 150,
-      rotate: 5,
-      scale: 0.88,
-    },
-
-    {
-      x: -700,
-      y: -220,
-      rotate: 13,
-      scale: 0.82,
-    },
-
-    {
-      x: -880,
-      y: -30,
-      rotate: -7,
-      scale: 0.75,
-    },
+  const desktopThrowPositions = [
+    { x: -300, y: -160, rotate: -12, scale: 1 },
+    { x: -470, y: 40, rotate: 8, scale: 0.9 },
+    { x: -650, y: -100, rotate: -6, scale: 0.82 },
+    { x: -800, y: 120, rotate: 11, scale: 0.95 },
+    { x: -560, y: 200, rotate: -9, scale: 0.78 },
+    { x: -350, y: 150, rotate: 5, scale: 0.88 },
+    { x: -700, y: -220, rotate: 13, scale: 0.82 },
+    { x: -880, y: -30, rotate: -7, scale: 0.75 },
   ];
 
+  const mobileThrowPositions = [
+    { x: -35, y: -45, rotate: -8, scale: 0.9 },
+    { x: -55, y: 25, rotate: 6, scale: 0.82 },
+    { x: -75, y: -25, rotate: -5, scale: 0.78 },
+    { x: -95, y: 45, rotate: 8, scale: 0.85 },
+    { x: -65, y: 55, rotate: -7, scale: 0.76 },
+    { x: -40, y: 35, rotate: 4, scale: 0.82 },
+    { x: -85, y: -55, rotate: 9, scale: 0.78 },
+    { x: -100, y: -10, rotate: -6, scale: 0.72 },
+  ];
+
+  const throwPositions = isMobile
+    ? mobileThrowPositions
+    : desktopThrowPositions;
 
   return (
     <motion.div
       className="story-splash"
-
-      initial={{
-        opacity: 0,
-      }}
-
-      animate={{
-        opacity: 1,
-      }}
-
-      exit={{
-        opacity: 0,
-      }}
-
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{
         duration: 0.5,
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-
       <div className="story-splash-track">
-
         {images.map((image, index) => {
-
           const position =
-            throwPositions[
-              index % throwPositions.length
-            ];
+            throwPositions[index % throwPositions.length];
 
-          /*
-             Normal:
-             folder RIGHT → photos travel LEFT
-
-             Reversed:
-             folder LEFT → photos travel RIGHT
-          */
-
-          const direction =
-            reversed ? -1 : 1;
+          const direction = reversed ? -1 : 1;
 
           return (
             <motion.div
               key={`${image}-${index}`}
-
-              className={`story-splash-image story-splash-image-${
-                index % 6
-              }`}
-
+              className={`story-splash-image story-splash-image-${index % 6}`}
               initial={{
                 x: 0,
                 y: 0,
@@ -390,9 +300,7 @@ function PhotoSplash({
                 rotate: 0,
                 opacity: 0,
               }}
-
               animate={{
-
                 x: [
                   0,
                   position.x * direction,
@@ -400,7 +308,6 @@ function PhotoSplash({
                   position.x * 0.94 * direction,
                   0,
                 ],
-
                 y: [
                   0,
                   position.y,
@@ -408,7 +315,6 @@ function PhotoSplash({
                   position.y * 0.94,
                   0,
                 ],
-
                 rotate: [
                   0,
                   position.rotate,
@@ -416,7 +322,6 @@ function PhotoSplash({
                   position.rotate * 0.7,
                   0,
                 ],
-
                 scale: [
                   0.18,
                   position.scale,
@@ -424,36 +329,14 @@ function PhotoSplash({
                   position.scale * 0.92,
                   0.18,
                 ],
-
-                opacity: [
-                  0,
-                  1,
-                  1,
-                  1,
-                  0,
-                ],
+                opacity: [0, 1, 1, 1, 0],
               }}
-
               transition={{
-
-                duration:
-                  14 + (index % 4) * 2,
-
-                delay:
-                  index * 1.2,
-
+                duration: 14 + (index % 4) * 2,
+                delay: index * 1.2,
                 repeat: Infinity,
-
                 repeatDelay: 0.5,
-
-                times: [
-                  0,
-                  0.22,
-                  0.52,
-                  0.78,
-                  1,
-                ],
-
+                times: [0, 0.22, 0.52, 0.78, 1],
                 ease: [
                   "easeOut",
                   "easeInOut",
@@ -461,44 +344,25 @@ function PhotoSplash({
                   "easeIn",
                 ],
               }}
-
               style={{
-                zIndex:
-                  10 + (index % 8),
+                zIndex: 10 + (index % 8),
               }}
             >
-
               <img
                 src={image}
                 alt=""
                 draggable={false}
               />
-
             </motion.div>
           );
         })}
-
       </div>
 
-
-      <div
-        className="
-          story-splash-fade
-          story-splash-fade-top
-        "
-      />
-
-      <div
-        className="
-          story-splash-fade
-          story-splash-fade-bottom
-        "
-      />
-
+      <div className="story-splash-fade story-splash-fade-top" />
+      <div className="story-splash-fade story-splash-fade-bottom" />
     </motion.div>
   );
 }
-
 
 /* =========================================================
    SINGLE STORY
@@ -511,24 +375,17 @@ function StoryItem({
   couple: (typeof couples)[number];
   index: number;
 }) {
+  const [galleryOpen, setGalleryOpen] = useState(false);
 
-  const [galleryOpen, setGalleryOpen] =
-    useState(false);
-
-  const reversed =
-    index % 2 !== 0;
+  const reversed = index % 2 !== 0;
 
   return (
     <section
       className={`story-section ${
-        reversed
-          ? "story-section-reversed"
-          : ""
+        reversed ? "story-section-reversed" : ""
       }`}
     >
-
       <div className="story-noise" />
-
 
       <motion.div
         className="story-label"
@@ -547,22 +404,13 @@ function StoryItem({
           duration: 0.8,
         }}
       >
-        <span>
-          {couple.number}
-        </span>
-
-        <span>
-          STORIES
-        </span>
+        <span>{couple.number}</span>
+        <span>STORIES</span>
       </motion.div>
 
-
       <div className="story-left">
-
         <AnimatePresence mode="wait">
-
           {!galleryOpen ? (
-
             <motion.div
               key="story-copy"
               className="story-copy"
@@ -584,7 +432,6 @@ function StoryItem({
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-
               <p className="story-kicker">
                 A collection of moments
               </p>
@@ -592,13 +439,9 @@ function StoryItem({
               <h2>
                 The people
                 <br />
-                <span>
-                  behind
-                </span>
+                <span>behind</span>
                 <br />
-                <em>
-                  the photographs.
-                </em>
+                <em>the photographs.</em>
               </h2>
 
               <p className="story-description">
@@ -608,29 +451,20 @@ function StoryItem({
                 This is the story we were
                 lucky enough to witness.
               </p>
-
             </motion.div>
-
           ) : (
-
             <PhotoSplash
               key="photo-splash"
               images={couple.images}
               reversed={reversed}
             />
-
           )}
-
         </AnimatePresence>
-
       </div>
-
 
       <motion.div
         className={`story-folder-wrapper ${
-          galleryOpen
-            ? "story-folder-open"
-            : ""
+          galleryOpen ? "story-folder-open" : ""
         }`}
         initial={{
           opacity: 0,
@@ -649,21 +483,15 @@ function StoryItem({
           ease: [0.22, 1, 0.36, 1],
         }}
       >
-
         <motion.button
           type="button"
           className="story-folder"
-          onClick={() =>
-            setGalleryOpen(
-              !galleryOpen
-            )
-          }
+          onClick={() => setGalleryOpen(!galleryOpen)}
           whileHover="hover"
           whileTap={{
             scale: 0.985,
           }}
         >
-
           <motion.div
             className="story-folder-tab"
             variants={{
@@ -682,12 +510,7 @@ function StoryItem({
             }}
             transition={{
               duration: 0.8,
-              ease: [
-                0.22,
-                1,
-                0.36,
-                1,
-              ],
+              ease: [0.22, 1, 0.36, 1],
             }}
           >
             <img
@@ -699,35 +522,20 @@ function StoryItem({
           <div className="story-folder-overlay" />
 
           <div className="story-folder-info">
-
             <div className="story-folder-top">
-
-              <span>
-                {couple.number}
-              </span>
-
-              <span>
-                {couple.year}
-              </span>
-
+              <span>{couple.number}</span>
+              <span>{couple.year}</span>
             </div>
 
             <div className="story-folder-bottom">
-
               <div>
-
                 <span className="story-folder-label">
                   A STORY OF
                 </span>
 
-                <strong>
-                  {couple.couple}
-                </strong>
+                <strong>{couple.couple}</strong>
 
-                <span>
-                  {couple.location}
-                </span>
-
+                <span>{couple.location}</span>
               </div>
 
               <motion.span
@@ -738,58 +546,40 @@ function StoryItem({
                   },
                 }}
               >
-                {galleryOpen
-                  ? "CLOSE ×"
-                  : "OPEN →"}
+                {galleryOpen ? "CLOSE ×" : "OPEN →"}
               </motion.span>
-
             </div>
-
           </div>
-
         </motion.button>
-
       </motion.div>
 
-
-      <div className="story-bottom">
-
-        <span>
-          LOVE STORIES / {couple.year}
-        </span>
+      {/* <div className="story-bottom">
+        <span>LOVE STORIES / {couple.year}</span>
 
         <span>
           {galleryOpen
             ? "EXPLORE THEIR STORY"
             : "SELECT THE STORY"}
         </span>
-
-      </div>
-
+      </div> */}
     </section>
   );
 }
-
 
 /* =========================================================
    ALL STORIES
 ========================================================= */
 
 export default function Story() {
-
   return (
     <div className="stories-container">
-
       {couples.map((couple, index) => (
-
         <StoryItem
           key={couple.number}
           couple={couple}
           index={index}
         />
-
       ))}
-
     </div>
   );
 }

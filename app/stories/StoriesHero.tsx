@@ -10,7 +10,7 @@ export default function StoriesHero() {
       <div className="stories-hero-noise" />
 
       {/* Small top label */}
-      <motion.div
+      {/* <motion.div
         className="stories-hero-label"
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -18,7 +18,7 @@ export default function StoriesHero() {
       >
         <span>01</span>
         <span>STORIES</span>
-      </motion.div>
+      </motion.div> */}
 
       {/* Main heading */}
       <div className="stories-hero-heading">
