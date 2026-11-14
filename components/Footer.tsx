@@ -2,12 +2,18 @@
 
 import Stack from "./Stack";
 import "./Footer.css";
+import Image from "next/image";
 
 const images = [
-  "/images/footer-01.jpg",
-  "/images/footer-02.jpg",
-  "/images/footer-03.jpg",
-  "/images/footer-04.jpg",
+  "/homestory/footer/1.jpg",
+  "/homestory/footer/2.jpg",
+  "/homestory/footer/3.jpg",
+  "/homestory/footer/4.jpg",
+  "/homestory/footer/5.jpg",
+  "/homestory/footer/6.jpg",
+  "/homestory/footer/7.jpg",
+  "/homestory/footer/8.jpg",
+  
 ];
 
 export default function Footer() {
@@ -33,7 +39,7 @@ export default function Footer() {
                 className="footer-stack-image"
               />
             ))}
-            autoplay={false}
+            autoplay={true}
             autoplayDelay={3000}
             pauseOnHover={false}
           />
