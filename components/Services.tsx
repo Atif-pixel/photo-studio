@@ -23,6 +23,16 @@ const services = [
     text: "Destination Weddings",
     image: "/services/destination-01.jpg",
   },
+   {
+    link: "/services/destination-weddings",
+    text: "Corporate Events",
+    image: "/services/destination-01.jpg",
+  },
+   {
+    link: "/services/destination-weddings",
+    text: "Birthdays & Anniversaries",
+    image: "/services/destination-01.jpg",
+  },
 ];
 
 export default function Services() {

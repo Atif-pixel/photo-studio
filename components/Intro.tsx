@@ -1,8 +1,26 @@
 "use client";
 
-import Image from "next/image";
+import { useEffect, useState } from "react";
+
+const videos = [
+  "rhHyl_0VjkQ",
+  "u03MsuIcepc",
+  "6qZK-DiuZa8",
+  "2IvsPd-OgXQ",
+  "yV6y5nMfCQA",
+];
 
 export default function Intro() {
+  const [activeVideo, setActiveVideo] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveVideo((current) => (current + 1) % videos.length);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative w-full overflow-hidden bg-[#f2f0eb] text-[#171717]">
       
@@ -25,17 +43,29 @@ export default function Intro() {
 
         {/* IMAGE SIDE */}
         <div className="relative min-h-[65vh] md:min-h-screen">
-          <div className="absolute inset-6 md:inset-10 lg:inset-14">
-            <Image
-              src="/intro.jpg"
-              alt="Wedding couple sharing a quiet moment"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+          <div className="absolute inset-6 md:inset-10 lg:inset-14 overflow-hidden">
+
+            {/* YouTube Video Morph Slider */}
+            {videos.map((video, index) => (
+              <iframe
+                key={video}
+                src={`https://www.youtube.com/embed/${video}?autoplay=1&mute=1&loop=1&playlist=${video}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0`}
+                title={`Wedding video ${index + 1}`}
+                allow="autoplay; encrypted-media"
+                allowFullScreen={false}
+                className={`absolute left-1/2 top-1/2 h-[120%] w-[215%] -translate-x-1/2 -translate-y-1/2 border-0 transition-all duration-[1100ms] ease-in-out ${
+                  index === activeVideo
+                    ? "scale-100 opacity-100 blur-0"
+                    : "scale-[1.08] opacity-0 blur-[8px]"
+                }`}
+                style={{
+                  pointerEvents: "none",
+                }}
+              />
+            ))}
 
             {/* Image label */}
-            <div className="absolute bottom-5 left-5 text-white">
+            <div className="absolute bottom-5 left-5 z-10 text-white">
               <p className="text-[9px] uppercase tracking-[0.35em]">
                 The moments between
               </p>

@@ -1,21 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-
 
 export default function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden">
 
-      {/* Background Image */}
-      <Image
-        src="/Hero1.jpg"
-        alt="Wedding photography"
-        fill
-        priority
-        className="object-cover"
-      />
+      {/* Background YouTube Video */}
+      <div className="absolute inset-0 overflow-hidden">
+        <iframe
+          src="https://www.youtube.com/embed/_xqOAZk6UCI?autoplay=1&mute=1&loop=1&playlist=_xqOAZk6UCI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0"
+          title="Wedding Hero Video"
+          allow="autoplay; encrypted-media"
+          allowFullScreen={false}
+          className="absolute left-1/2 top-1/2 h-[56.25vw] min-h-[100vh] w-[100vw] min-w-[177.78vh] -translate-x-1/2 -translate-y-1/2 border-0 pointer-events-none"
+        />
+      </div>
 
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/25" />

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import "./StorySection.css";
+import Image from "next/image";
 
 type Story = {
   id: number;
