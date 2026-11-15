@@ -3,10 +3,10 @@
 
 import { FormEvent, useState } from "react";
 
-const CONTACT_EMAIL = "YOUR_EMAIL@example.com";
-const PHONE_NUMBER = "+91 XXXXX XXXXX";
-const WHATSAPP_NUMBER = "91XXXXXXXXXX";
-const MAP_LOCATION = "BharatiFilm Creation, Pune, Maharashtra, India";
+const CONTACT_EMAIL = "bharatifilmcreation@gmail.com";
+const PHONE_NUMBER = "+91 7447275764";
+const WHATSAPP_NUMBER = "917447275764";
+const MAP_LOCATION = "BharatiFilm Creations, Pune, Maharashtra, India";
 
 const eventTypes = [
   "Wedding Photography",
