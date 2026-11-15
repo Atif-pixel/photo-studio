@@ -186,7 +186,7 @@ export default function About() {
               </span>
 
               <span className="text-[9px] uppercase tracking-[0.3em] text-black/45">
-                Since 2026
+                Since 2017
               </span>
             </div>
           </div>

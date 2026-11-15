@@ -150,7 +150,7 @@ export default function NavBar() {
           </div>
 
           <div className="absolute bottom-8 right-8 text-white/40 text-[9px] tracking-[0.3em] uppercase">
-            Since 2026
+            Since 2017
           </div>
         </motion.div>
       </nav>

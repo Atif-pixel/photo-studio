@@ -120,7 +120,7 @@ export default function Intro() {
               </p>
 
               <span className="shrink-0 text-[10px] uppercase tracking-[0.3em] text-black/50">
-                Since 2026
+                Since 2017
               </span>
             </div>
 
