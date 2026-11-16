@@ -1,12 +1,13 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import YouTubeHeroSlider from "./components/YouTubeHeroSlider";
 
 type Page = "home" | "stories" | "album" | "about" | "services" | "contact";
 type Category = "All" | "Haldi" | "Mehendi" | "Wedding" | "Reception";
 
 const local = {
   palace: "/assets/34543.png",
-  bride: "/assets/eff0d.png",
-  ritual: "/assets/9f2b8.png",
+  bride: "/assets/Colin-Vaidehi.jpg",
+  ritual: "/assets/Pratik-Tana.jpg",
 };
 
 const unsplash = (id: string, width = 1600) =>
@@ -209,7 +210,7 @@ function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2025 BHARATI FILM CREATION</span>
+        <span>© 2017 BHARATI FILM CREATIONS</span>
         <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           Back to top ↑
         </button>
@@ -238,17 +239,15 @@ function Home() {
           </p>
         </div>
         <div className="caption-row">
-          <span>SAMPLE WEDDING IMAGERY · YOUR PHOTOGRAPHS WILL REPLACE THESE</span>
+          <span>STORIES WORTH REMEMBERING · WE CAPTURE YOUR MOMENTS</span>
           <Link to="/stories">EXPLORE WEDDINGS ↓</Link>
         </div>
-        <img
-          className="hero-image"
-          src={local.palace}
-          alt="Indian destination wedding in a grand palace courtyard"
-        />
+        <div className="hero-image">
+          <YouTubeHeroSlider />
+        </div>
         <div className="caption-row">
           <span>A celebration of love, in every frame.</span>
-          <span>SAMPLE PHOTOGRAPH</span>
+          <span>SOME HIGLIGHTS</span>
         </div>
       </section>
 
@@ -269,7 +268,7 @@ function Home() {
             <img src={local.bride} alt="Indian bride in maroon bridal attire" />
             <figcaption>
               <span className="display-small">Before the forever</span>
-              <span>BRIDAL PORTRAITS / SAMPLE</span>
+              <span>BRIDAL PORTRAITS</span>
             </figcaption>
           </figure>
           <div className="editorial-secondary">
@@ -277,7 +276,7 @@ function Home() {
               <img src={local.ritual} alt="Indian bride and groom during a wedding ritual" />
               <figcaption>
                 <span className="display-small">A thousand little moments</span>
-                <span>WEDDING RITUALS / SAMPLE</span>
+                <span>WEDDING RITUALS</span>
               </figcaption>
             </figure>
             <h3>
