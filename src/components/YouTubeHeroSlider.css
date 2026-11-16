@@ -1,0 +1,38 @@
+.youtube-hero-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+.youtube-hero-slide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(1.08);
+  filter: blur(8px);
+  transition:
+    opacity 1100ms ease-in-out,
+    transform 1100ms ease-in-out,
+    filter 1100ms ease-in-out;
+  pointer-events: none;
+}
+
+.youtube-hero-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+.youtube-hero-slide iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  border: 0;
+  pointer-events: none;
+}
