@@ -5,9 +5,15 @@ type Page = "home" | "stories" | "album" | "about" | "services" | "contact";
 type Category = "All" | "Haldi" | "Mehendi" | "Wedding" | "Reception";
 
 const local = {
-  palace: "/assets/34543.png",
+  palace: "/assets/Rohit-Lucy.jpg",
   bride: "/assets/Colin-Vaidehi.jpg",
   ritual: "/assets/Pratik-Tana.jpg",
+  rituals: "/assets/wedding_rituals.jpg",
+  couple4: "/assets/Tushar-Nidhi.jpg",
+  couple5: "/assets/Chirag-Angel.jpg",
+  couple6: "/assets/Parth-Shradha.jpg",
+  couple7: "/assets/Akshay-Eesha.JPG",
+  couple8: "/assets/Varun-Rutuja.jpg",
 };
 
 const unsplash = (id: string, width = 1600) =>
@@ -36,46 +42,60 @@ const photos = [
 
 const stories = [
   {
-    slug: "aanya-arjun",
-    names: "Aanya & Arjun",
+    slug: "rohit-lucy",
+    names: "Rohit & Lucy",
     place: "Samode Palace, Jaipur",
     year: "2024",
     image: local.palace,
   },
   {
-    slug: "meher-kabir",
-    names: "Meher & Kabir",
+    slug: "colin-vaidehi",
+    names: "Colin & Vaidehi",
     place: "The Oberoi Udaivilas, Udaipur",
     year: "2024",
     image: local.bride,
   },
   {
-    slug: "isha-veer",
-    names: "Isha & Veer",
+    slug: "pratik-tana",
+    names: "Pratik & Tana",
     place: "Suryagarh, Jaisalmer",
     year: "2023",
     image: local.ritual,
   },
   {
-    slug: "tara-dev",
-    names: "Tara & Dev",
+    slug: "tushar-nidhi",
+    names: "Tushar & Nidhi",
     place: "Rambagh Palace, Jaipur",
     year: "2023",
-    image: photos[2],
+    image: local.couple4,
   },
   {
-    slug: "naina-advait",
-    names: "Naina & Advait",
+    slug: "chirag-angel",
+    names: "Chirag & Angel",
     place: "Alila Fort Bishangarh",
     year: "2022",
-    image: photos[14],
+    image: local.couple5,
   },
   {
-    slug: "zoya-rehan",
-    names: "Zoya & Rehan",
+    slug: "parth-shradha",
+    names: "Parth & Shradha",
     place: "Taj Falaknuma, Hyderabad",
     year: "2022",
-    image: photos[17],
+    image: local.couple6,
+  },
+  {
+    slug: "akshay-eesha",
+    names: "Akshay & Eesha",
+    place: "Taj Falaknuma, Hyderabad",
+    year: "2022",
+    image: local.couple7,
+  },
+  {
+    slug: "varun-rutuja",
+    names: "Varun & Rutuja",
+    place: "Taj Falaknuma, Hyderabad",
+    year: "2022",
+    image: local.couple8,
   },
 ];
 
@@ -273,7 +293,7 @@ function Home() {
           </figure>
           <div className="editorial-secondary">
             <figure>
-              <img src={local.ritual} alt="Indian bride and groom during a wedding ritual" />
+              <img src={local.rituals} alt="Indian bride and groom during a wedding ritual" />
               <figcaption>
                 <span className="display-small">A thousand little moments</span>
                 <span>WEDDING RITUALS</span>
@@ -327,7 +347,7 @@ function Home() {
           <Link to="/contact" className="button">
             Enquire about your wedding <span>↗</span>
           </Link>
-          <a href="https://wa.me/919876543210">WhatsApp · +91 98765 43210</a>
+          <a href="https://wa.me/917447275764">WhatsApp · +91 7447275764</a>
         </div>
       </section>
     </>
@@ -586,9 +606,9 @@ function About() {
         </div>
         <div className="team-grid">
           {[
-            ["Aarav Mehta", "FOUNDER · PHOTOGRAPHER", photos[9]],
-            ["Mira Shah", "CREATIVE DIRECTOR", photos[19 % photos.length]],
-            ["Rohan Kapoor", "LEAD FILMMAKER", photos[3]],
+            ["Yogesh Bharati", "FOUNDER · PHOTOGRAPHER", photos[9]],
+            ["Yogesh Bharati", "CREATIVE DIRECTOR", photos[19 % photos.length]],
+            ["Yogesh Bharati", "LEAD FILMMAKER", photos[3]],
           ].map(([name, role, image]) => (
             <figure key={name}>
               <img src={image} alt={`${name}, ${role}`} />
@@ -625,7 +645,7 @@ const services = [
     number: "02",
     title: "Pre-wedding Stories",
     text: "Relaxed portrait sessions designed around a place, pace and feeling that are entirely your own.",
-    image: photos[15],
+    image: local.couple4,
   },
   {
     number: "03",
@@ -638,6 +658,18 @@ const services = [
     title: "Wedding Films",
     text: "Soulful, cinematic films woven from movement, sound, vows and the voices you hold closest.",
     image: local.ritual,
+  },
+  {
+    number: "05",
+    title: "Corporate Events",
+    text: "Soulful, cinematic films woven from movement, sound, vows and the voices you hold closest.",
+    image: local.couple5,
+  },
+  {
+    number: "06",
+    title: "Birthdays & Celebrations",
+    text: "Soulful, cinematic films woven from movement, sound, vows and the voices you hold closest.",
+    image: local.couple6,
   },
 ];
 
@@ -711,10 +743,10 @@ function Contact() {
             hear from you.
           </h2>
           <a href="mailto:hello@bharatifilmcreation.com">hello@bharatifilmcreation.com</a>
-          <a href="tel:+919876543210">+91 98765 43210</a>
+          <a href="tel:+917447275764">+91 74472 75764</a>
           <a
             className="whatsapp"
-            href="https://wa.me/919876543210"
+            href="https://wa.me/917447275764"
             target="_blank"
             rel="noreferrer"
           >
@@ -752,10 +784,12 @@ function Contact() {
                 <option>Pre-wedding</option>
                 <option>Destination wedding</option>
                 <option>Wedding films</option>
+                <option>Corporate events</option>
+                <option>Birthdays & celebrations</option>
               </select>
             </label>
             <label>
-              WEDDING DATE
+              EVENT DATE
               <input type="date" name="date" required />
             </label>
           </div>
