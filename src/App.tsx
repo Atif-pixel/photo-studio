@@ -2,7 +2,17 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import YouTubeHeroSlider from "./components/YouTubeHeroSlider";
 
 type Page = "home" | "stories" | "album" | "about" | "services" | "contact";
-type Category = "All" | "Haldi" | "Mehendi" | "Wedding" | "Reception";
+type Category = string;
+type CloudinaryPhoto = {
+  publicId: string;
+  url: string;
+  category: string;
+  format: string;
+  width: number;
+  height: number;
+  bytes: number;
+};
+
 
 const local = {
   palace: "/assets/Rohit-Lucy.jpg",
@@ -19,26 +29,6 @@ const local = {
 const unsplash = (id: string, width = 1600) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&q=84&w=${width}`;
 
-const photos = [
-  unsplash("photo-1639575668910-9a14063add58"),
-  unsplash("photo-1639575668832-8991b62831ff"),
-  unsplash("photo-1755946684049-03e1ebc67ea7"),
-  unsplash("photo-1758467745965-00ca240b1224"),
-  unsplash("photo-1639575668825-713895939825"),
-  unsplash("photo-1639575668829-c56a82db9f00"),
-  unsplash("photo-1639575668834-e0fd81f744ad"),
-  unsplash("photo-1639575668829-7e59e0195b06"),
-  unsplash("photo-1639575668833-563e2b735e77"),
-  unsplash("photo-1584610129029-a2144a29359d"),
-  unsplash("photo-1595419293062-457444d419b8"),
-  unsplash("photo-1639575667162-3558baf3acf9"),
-  unsplash("photo-1650709244939-d9e5cf32ef0a"),
-  unsplash("photo-1639575668107-28826c930d9d"),
-  unsplash("photo-1650709244890-cc35b30d8036"),
-  unsplash("photo-1501144600699-729d204d332b"),
-  unsplash("photo-1764796833952-ec9c0517d4a2"),
-  unsplash("photo-1717131553880-d9e0af636fd9"),
-];
 
 const stories = [
   {
@@ -77,7 +67,7 @@ const stories = [
     image: local.couple5,
   },
   {
-    slug: "parth-shradha",
+    slug: "parth-shraddha",
     names: "Parth & Shradha",
     place: "Taj Falaknuma, Hyderabad",
     year: "2022",
@@ -97,34 +87,6 @@ const stories = [
     year: "2022",
     image: local.couple8,
   },
-];
-
-const albumPhotos: { src: string; category: Exclude<Category, "All">; alt: string }[] = [
-  {
-    src: local.palace,
-    category: "Wedding",
-    alt: "Couple walking through a palace wedding courtyard",
-  },
-  { src: local.bride, category: "Wedding", alt: "Bridal portrait in deep maroon wedding attire" },
-  { src: photos[2], category: "Mehendi", alt: "Wedding guests in colourful traditional attire" },
-  { src: local.ritual, category: "Wedding", alt: "Bride and groom during their wedding ceremony" },
-  { src: photos[3], category: "Reception", alt: "Wedding party at a grand Indian palace" },
-  { src: photos[4], category: "Wedding", alt: "Traditional baraat ceremony details" },
-  { src: photos[10], category: "Mehendi", alt: "Guests arriving at a palace celebration" },
-  { src: photos[6], category: "Haldi", alt: "Family gathered for a pre-wedding ritual" },
-  { src: photos[12], category: "Reception", alt: "A regal Indian wedding procession" },
-  { src: photos[8], category: "Haldi", alt: "Friends sharing a candid celebration" },
-  { src: photos[14], category: "Wedding", alt: "Family dressed for the wedding ceremony" },
-  { src: photos[17], category: "Reception", alt: "Groom arriving in a traditional procession" },
-  { src: photos[0], category: "Mehendi", alt: "Loved ones together during wedding festivities" },
-  { src: photos[13], category: "Haldi", alt: "A joyful moment during an Indian celebration" },
-  { src: photos[1], category: "Wedding", alt: "Family watching the wedding rituals" },
-  { src: photos[5], category: "Reception", alt: "Candid portrait from the wedding reception" },
-  { src: photos[11], category: "Haldi", alt: "A colourful gathering before the ceremony" },
-  { src: photos[15], category: "Mehendi", alt: "Quiet architectural moment between celebrations" },
-  { src: photos[7], category: "Wedding", alt: "Wedding guests gathered for the vows" },
-  { src: photos[9], category: "Reception", alt: "Portrait in warm evening light" },
-  { src: photos[16], category: "Mehendi", alt: "Festive colour at a destination celebration" },
 ];
 
 function routeFromPath(): { page: Page; slug?: string } {
@@ -422,26 +384,124 @@ function Stories() {
   );
 }
 
+
+
 function Album({ slug = "aanya-arjun" }: { slug?: string }) {
   const story = stories.find((item) => item.slug === slug) || stories[0];
+
+  const isCloudinaryAlbum = stories.some((item) => item.slug === slug);
+
   const [category, setCategory] = useState<Category>("All");
   const [lightbox, setLightbox] = useState<number | null>(null);
-  const filtered = useMemo(
+  const [cloudinaryPhotos, setCloudinaryPhotos] = useState<CloudinaryPhoto[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+
+  // Load the correct Cloudinary manifest for the selected couple
+  useEffect(() => {
+    if (!isCloudinaryAlbum) {
+      setCloudinaryPhotos([]);
+      setLoading(false);
+      setLoadError(false);
+      setCategory("All");
+      setLightbox(null);
+      return;
+    }
+
+    let cancelled = false;
+
+    setCloudinaryPhotos([]);
+    setLoading(true);
+    setLoadError(false);
+    setCategory("All");
+    setLightbox(null);
+
+    fetch(`/albums/${slug}.json`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Could not load album");
+        }
+
+        return response.json();
+      })
+      .then((data: CloudinaryPhoto[]) => {
+        if (!Array.isArray(data)) {
+          throw new Error("Invalid album data");
+        }
+
+        if (!cancelled) {
+          setCloudinaryPhotos(data);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setLoadError(true);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [slug, isCloudinaryAlbum]);
+
+  // Use Cloudinary photographs for all registered couples
+  const galleryPhotos = useMemo(
     () =>
-      category === "All" ? albumPhotos : albumPhotos.filter((photo) => photo.category === category),
-    [category],
+      isCloudinaryAlbum
+        ? cloudinaryPhotos.map((photo) => ({
+            src: photo.url,
+            category: photo.category,
+            alt: `${story.names} wedding photograph`,
+          }))
+        : albumPhotos,
+    [isCloudinaryAlbum, cloudinaryPhotos, story.names],
   );
 
+  // Automatically create filters from available event categories
+  const categories = useMemo(
+    () => [
+      "All",
+      ...Array.from(
+        new Set(galleryPhotos.map((photo) => photo.category))
+      ),
+    ],
+    [galleryPhotos],
+  );
+
+  const filtered = useMemo(
+    () =>
+      category === "All"
+        ? galleryPhotos
+        : galleryPhotos.filter((photo) => photo.category === category),
+    [category, galleryPhotos],
+  );
+
+  // Lightbox keyboard controls
   useEffect(() => {
-    if (lightbox === null) return;
+    if (lightbox === null || filtered.length === 0) return;
+
     const key = (event: KeyboardEvent) => {
       if (event.key === "Escape") setLightbox(null);
-      if (event.key === "ArrowRight") setLightbox((lightbox + 1) % filtered.length);
-      if (event.key === "ArrowLeft")
-        setLightbox((lightbox - 1 + filtered.length) % filtered.length);
+
+      if (event.key === "ArrowRight") {
+        setLightbox((lightbox + 1) % filtered.length);
+      }
+
+      if (event.key === "ArrowLeft") {
+        setLightbox(
+          (lightbox - 1 + filtered.length) % filtered.length
+        );
+      }
     };
+
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", key);
+
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", key);
@@ -458,6 +518,7 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
           <p>{story.place}</p>
         </div>
       </section>
+
       <section className="album-intro page-pad">
         <div>
           <p className="eyebrow">THE CELEBRATION</p>
@@ -472,8 +533,9 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
           morning rituals to a dance floor under the stars, this is their story.
         </p>
       </section>
+
       <div className="filters page-pad" role="group" aria-label="Filter album by event">
-        {(["All", "Haldi", "Mehendi", "Wedding", "Reception"] as Category[]).map((item) => (
+        {categories.map((item) => (
           <button
             key={item}
             className={category === item ? "active" : ""}
@@ -485,21 +547,46 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
             {item}
           </button>
         ))}
-        <span>{filtered.length} PHOTOGRAPHS</span>
+
+        <span>
+          {loading
+            ? "LOADING..."
+            : `${filtered.length} PHOTOGRAPHS`}
+        </span>
       </div>
+
       <section className="masonry page-pad" aria-live="polite">
-        {filtered.map((photo, index) => (
-          <button
-            className="masonry-item"
-            key={`${photo.src}-${index}`}
-            onClick={() => setLightbox(index)}
-            aria-label={`Open photo ${index + 1}: ${photo.alt}`}
-          >
-            <img src={photo.src} alt={photo.alt} loading={index > 5 ? "lazy" : "eager"} />
-            <span>VIEW</span>
-          </button>
-        ))}
+        {loading ? (
+          <p className="album-status" role="status">
+            Loading wedding photographs...
+          </p>
+        ) : loadError ? (
+          <p className="album-status" role="alert">
+            We couldn’t load this album right now. Please refresh the page and try again.
+          </p>
+        ) : filtered.length === 0 ? (
+          <p className="album-status">
+            No photographs found in this category.
+          </p>
+        ) : (
+          filtered.map((photo, index) => (
+            <button
+              className="masonry-item"
+              key={`${photo.src}-${index}`}
+              onClick={() => setLightbox(index)}
+              aria-label={`Open photo ${index + 1}: ${photo.alt}`}
+            >
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                loading={index > 5 ? "lazy" : "eager"}
+              />
+              <span>VIEW</span>
+            </button>
+          ))
+        )}
       </section>
+
       <div className="album-end page-pad">
         <p className="eyebrow">END OF STORY</p>
         <h2>
@@ -509,7 +596,8 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
         </h2>
         <Link to="/stories">Explore more weddings →</Link>
       </div>
-      {lightbox !== null && (
+
+      {lightbox !== null && filtered[lightbox] && (
         <div
           className="lightbox"
           role="dialog"
@@ -518,8 +606,10 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
           onClick={() => setLightbox(null)}
         >
           <div className="lightbox-count">
-            {String(lightbox + 1).padStart(2, "0")} / {String(filtered.length).padStart(2, "0")}
+            {String(lightbox + 1).padStart(2, "0")} /{" "}
+            {String(filtered.length).padStart(2, "0")}
           </div>
+
           <button
             className="lightbox-close"
             aria-label="Close photo"
@@ -527,21 +617,26 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
           >
             ×
           </button>
+
           <button
             className="lightbox-prev"
             aria-label="Previous photo"
             onClick={(e) => {
               e.stopPropagation();
-              setLightbox((lightbox - 1 + filtered.length) % filtered.length);
+              setLightbox(
+                (lightbox - 1 + filtered.length) % filtered.length
+              );
             }}
           >
             ←
           </button>
+
           <img
             src={filtered[lightbox].src}
             alt={filtered[lightbox].alt}
             onClick={(e) => e.stopPropagation()}
           />
+
           <button
             className="lightbox-next"
             aria-label="Next photo"
@@ -552,12 +647,14 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
           >
             →
           </button>
+
           <p>{filtered[lightbox].category}</p>
         </div>
       )}
     </>
   );
 }
+
 
 function About() {
   return (
