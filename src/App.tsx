@@ -2,7 +2,6 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import YouTubeHeroSlider from "./components/YouTubeHeroSlider";
 
 type Page = "home" | "stories" | "album" | "about" | "services" | "contact";
-type Category = string;
 type CloudinaryPhoto = {
   publicId: string;
   url: string;
@@ -13,6 +12,22 @@ type CloudinaryPhoto = {
   bytes: number;
 };
 
+type GalleryPhoto = {
+  src: string;
+  category: string;
+  alt: string;
+};
+
+type TeamMember = {
+  name: string;
+  role: string;
+};
+
+const teamMembers: TeamMember[] = [
+  { name: "Yogesh Bharati", role: "FOUNDER · PHOTOGRAPHER" },
+  { name: "Yogesh Bharati", role: "CREATIVE DIRECTOR" },
+  { name: "Yogesh Bharati", role: "LEAD FILMMAKER" },
+];
 
 const local = {
   palace: "/assets/Rohit-Lucy.jpg",
@@ -25,9 +40,6 @@ const local = {
   couple7: "/assets/Akshay-Eesha.JPG",
   couple8: "/assets/Varun-Rutuja.jpg",
 };
-
-const unsplash = (id: string, width = 1600) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&q=84&w=${width}`;
 
 
 const stories = [
@@ -131,39 +143,48 @@ function Header() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
   return (
-    <header className="site-header">
-      <Link to="/" className="brand" onClick={close}>
-        Bharati Film Creation
-      </Link>
-      <button
-        className="menu-button"
-        aria-expanded={open}
-        aria-label="Toggle menu"
-        onClick={() => setOpen(!open)}
-      >
-        <span />
-        <span />
-      </button>
-      <nav className={open ? "nav open" : "nav"} aria-label="Main navigation">
-        <Link to="/stories" onClick={close}>
-          Weddings
-        </Link>
-        <Link to="/about" onClick={close}>
-          Our story
-        </Link>
-        <Link to="/services" onClick={close}>
-          Services
-        </Link>
-        <Link to="/contact" onClick={close}>
-          Inquire
-        </Link>
-        <Link to="/contact" onClick={close} className="button button-small">
-          Tell us your story <span>↗</span>
-        </Link>
-      </nav>
-    </header>
+    
+<header className="site-header">
+  <Link to="/" className="brand" onClick={close}>
+    <img
+      src="/assets/logo.png"
+      alt="Bharati Film Creation"
+      className="brand-logo"
+    />
+  </Link>
+
+  <button
+    className="menu-button"
+    aria-expanded={open}
+    aria-label="Toggle menu"
+    onClick={() => setOpen(!open)}
+  >
+    <span />
+    <span />
+  </button>
+
+  <nav className={open ? "nav open" : "nav"} aria-label="Main navigation">
+    <Link to="/stories" onClick={close}>
+      Weddings
+    </Link>
+    <Link to="/about" onClick={close}>
+      Our story
+    </Link>
+    <Link to="/services" onClick={close}>
+      Services
+    </Link>
+    <Link to="/contact" onClick={close}>
+      Inquire
+    </Link>
+    <Link to="/contact" onClick={close} className="button button-small">
+      Tell us your story <span>↗</span>
+    </Link>
+  </nav>
+</header>
+
   );
 }
+
 
 function Footer() {
   return (
@@ -175,22 +196,42 @@ function Footer() {
           </Link>
           <p>Indian destination weddings, thoughtfully remembered.</p>
         </div>
+
         <div className="footer-links">
           <Link to="/stories">Weddings</Link>
           <Link to="/about">Our story</Link>
           <Link to="/services">Services</Link>
           <Link to="/contact">Contact</Link>
         </div>
+
         <div className="footer-links">
           <a href="https://instagram.com" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
             Instagram ↗
           </a>
-          <a href="mailto:hello@bharatifilmcreation.com">Email us</a>
-          <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer">
+
+          <a href="mailto:bharatifilmcreation@gmail.com">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg>
+            Email us
+          </a>
+
+          <a href="https://wa.me/917447275764" target="_blank" rel="noreferrer">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M20.5 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.1-4.6A8.5 8.5 0 1 1 20.5 11.5Z" />
+              <path d="M8.5 8.5c.3 2.4 2.6 4.7 5 5l1.2-1.2 2 1c-.3 1.5-1.4 2.2-2.7 2.1-3.8-.4-7-3.6-7.4-7.4-.1-1.3.6-2.4 2.1-2.7l1 2-1.2 1.2Z" />
+            </svg>
             WhatsApp ↗
           </a>
         </div>
       </div>
+
       <div className="footer-bottom">
         <span>© 2017 BHARATI FILM CREATIONS</span>
         <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
@@ -200,6 +241,7 @@ function Footer() {
     </footer>
   );
 }
+
 
 function Home() {
   return (
@@ -291,27 +333,54 @@ function Home() {
         </div>
       </section>
 
-      <section className="home-contact page-pad">
-        <div>
-          <p className="eyebrow">03 / YOUR NEXT CHAPTER</p>
-          <h2>
-            Your forever
-            <br />
-            starts here.
-          </h2>
-        </div>
-        <div>
-          <p>
-            Tell us your date, your destination,
-            <br />
-            and the celebration you’re dreaming of.
-          </p>
-          <Link to="/contact" className="button">
-            Enquire about your wedding <span>↗</span>
-          </Link>
-          <a href="https://wa.me/917447275764">WhatsApp · +91 7447275764</a>
-        </div>
-      </section>
+     
+<section className="home-contact page-pad">
+  <div className="home-contact-left">
+    <p className="eyebrow">03 / YOUR NEXT CHAPTER</p>
+
+    <h2>
+      Your forever
+      <br />
+      starts here<span>.</span>
+    </h2>
+  </div>
+
+  <div className="home-contact-right">
+    <p className="home-contact-description">
+      Every beautiful celebration begins with a conversation.
+      Tell us your date, your destination, and the story
+      you want us to capture.
+    </p>
+
+    <div className="home-contact-actions">
+      <Link to="/contact" className="button home-contact-button">
+        Enquire about your wedding
+        <span aria-hidden="true">↗</span>
+      </Link>
+
+      <a
+        href="https://wa.me/917447275764"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="home-contact-whatsapp"
+        aria-label="Chat with us on WhatsApp"
+        title="Chat with us on WhatsApp"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="23"
+          height="23"
+          fill="currentColor"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M12.04 2a9.9 9.9 0 0 0-8.48 15.02L2 22l5.15-1.35A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.18 8.18 0 0 1-4.17-1.14l-.3-.18-3.06.8.82-2.98-.2-.31a8.2 8.2 0 1 1 6.91 3.81Zm4.5-6.14c-.25-.13-1.48-.73-1.71-.81-.23-.09-.4-.13-.56.13-.17.25-.65.81-.8.98-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.49-1.4-1.74-.14-.25-.01-.39.11-.52.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.02 2.57c.12.16 1.75 2.67 4.24 3.75.59.25 1.05.41 1.41.53.59.19 1.13.16 1.56.1.47-.07 1.48-.61 1.69-1.2.21-.59.21-1.09.15-1.2-.06-.1-.23-.16-.48-.29Z" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
     </>
   );
 }
@@ -351,10 +420,10 @@ function Stories() {
         text="A collection of celebrations shaped by family, tradition and the wonderfully unexpected."
       />
       <section className="stories-grid page-pad">
-        {stories.map((story, index) => (
+        {stories.map((story) => (
           <Link
             to={`/stories/${story.slug}`}
-            className={`story-card story-${index + 1}`}
+            className="story-card"
             key={story.slug}
           >
             <div className="story-image">
@@ -389,9 +458,7 @@ function Stories() {
 function Album({ slug = "aanya-arjun" }: { slug?: string }) {
   const story = stories.find((item) => item.slug === slug) || stories[0];
 
-  const isCloudinaryAlbum = stories.some((item) => item.slug === slug);
-
-  const [category, setCategory] = useState<Category>("All");
+  const [category, setCategory] = useState<string>("All");
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [cloudinaryPhotos, setCloudinaryPhotos] = useState<CloudinaryPhoto[]>([]);
   const [loading, setLoading] = useState(false);
@@ -399,15 +466,6 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
 
   // Load the correct Cloudinary manifest for the selected couple
   useEffect(() => {
-    if (!isCloudinaryAlbum) {
-      setCloudinaryPhotos([]);
-      setLoading(false);
-      setLoadError(false);
-      setCategory("All");
-      setLightbox(null);
-      return;
-    }
-
     let cancelled = false;
 
     setCloudinaryPhotos([]);
@@ -416,7 +474,7 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
     setCategory("All");
     setLightbox(null);
 
-    fetch(`/albums/${slug}.json`)
+    fetch(`/albums/${story.slug}.json`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Could not load album");
@@ -447,33 +505,26 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
     return () => {
       cancelled = true;
     };
-  }, [slug, isCloudinaryAlbum]);
+  }, [story.slug]);
 
-  // Use Cloudinary photographs for all registered couples
-  const galleryPhotos = useMemo(
+  // Use Cloudinary photographs for all wedding albums
+  const galleryPhotos = useMemo<GalleryPhoto[]>(
     () =>
-      isCloudinaryAlbum
-        ? cloudinaryPhotos.map((photo) => ({
-            src: photo.url,
-            category: photo.category,
-            alt: `${story.names} wedding photograph`,
-          }))
-        : albumPhotos,
-    [isCloudinaryAlbum, cloudinaryPhotos, story.names],
+      cloudinaryPhotos.map((photo: CloudinaryPhoto) => ({
+        src: photo.url,
+        category: photo.category,
+        alt: `${story.names} wedding photograph`,
+      })),
+    [cloudinaryPhotos, story.names],
   );
 
   // Automatically create filters from available event categories
-  const categories = useMemo(
-    () => [
-      "All",
-      ...Array.from(
-        new Set(galleryPhotos.map((photo) => photo.category))
-      ),
-    ],
+  const categories = useMemo<string[]>(
+    () => ["All", ...Array.from(new Set(galleryPhotos.map((photo: GalleryPhoto) => photo.category)))],
     [galleryPhotos],
   );
 
-  const filtered = useMemo(
+  const filtered = useMemo<GalleryPhoto[]>(
     () =>
       category === "All"
         ? galleryPhotos
@@ -535,7 +586,7 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
       </section>
 
       <div className="filters page-pad" role="group" aria-label="Filter album by event">
-        {categories.map((item) => (
+        {categories.map((item: string) => (
           <button
             key={item}
             className={category === item ? "active" : ""}
@@ -569,7 +620,7 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
             No photographs found in this category.
           </p>
         ) : (
-          filtered.map((photo, index) => (
+          filtered.map((photo: GalleryPhoto, index: number) => (
             <button
               className="masonry-item"
               key={`${photo.src}-${index}`}
@@ -656,6 +707,15 @@ function Album({ slug = "aanya-arjun" }: { slug?: string }) {
 }
 
 
+const teamPlaceholder = `data:image/svg+xml,${encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+    <rect width="800" height="1000" fill="#e9e1d8" />
+    <circle cx="400" cy="365" r="115" fill="#c9b9aa" />
+    <path d="M180 850c20-190 105-285 220-285s200 95 220 285" fill="#c9b9aa" />
+    <text x="400" y="945" text-anchor="middle" fill="#746258" font-family="Arial, sans-serif" font-size="28" letter-spacing="5">PHOTO COMING SOON</text>
+  </svg>`
+)}`;
+
 function About() {
   return (
     <>
@@ -702,16 +762,15 @@ function About() {
           </p>
         </div>
         <div className="team-grid">
-          {[
-            ["Yogesh Bharati", "FOUNDER · PHOTOGRAPHER", photos[9]],
-            ["Yogesh Bharati", "CREATIVE DIRECTOR", photos[19 % photos.length]],
-            ["Yogesh Bharati", "LEAD FILMMAKER", photos[3]],
-          ].map(([name, role, image]) => (
-            <figure key={name}>
-              <img src={image} alt={`${name}, ${role}`} />
+          {teamMembers.map((member) => (
+            <figure key={member.role}>
+              <img
+                src={teamPlaceholder}
+                alt={`${member.name}, ${member.role} — photo coming soon`}
+              />
               <figcaption>
-                <h3>{name}</h3>
-                <p>{role}</p>
+                <h3>{member.name}</h3>
+                <p>{member.role}</p>
               </figcaption>
             </figure>
           ))}
@@ -785,7 +844,7 @@ function Services() {
         text="Photography and films that honour the scale of your celebration and the intimacy inside it."
       />
       <section className="services-list page-pad">
-        {services.map((service, index) => (
+        {services.map((service, index: number) => (
           <article className={index % 2 ? "reverse" : ""} key={service.title}>
             <img src={service.image} alt={service.title} />
             <div>
@@ -839,7 +898,7 @@ function Contact() {
             <br />
             hear from you.
           </h2>
-          <a href="mailto:hello@bharatifilmcreation.com">hello@bharatifilmcreation.com</a>
+          <a href="mailto:bharatifilmcreation@gmail.com">bharatifilmcreation@gmail.com</a>
           <a href="tel:+917447275764">+91 74472 75764</a>
           <a
             className="whatsapp"
